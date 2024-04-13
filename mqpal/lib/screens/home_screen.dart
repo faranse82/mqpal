@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mqpal/expanded_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:mqpal/widgets/inquiry.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
   static const _textTheme = TextTheme(
     displayLarge: TextStyle(
       color: Colors.black,
@@ -226,17 +230,24 @@ class HomeScreen extends StatelessWidget {
                             right: 150,
                             top: 240,
                           ),
-                          child: Container(
-                            width: 180,
-                            height: 55,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFA6192E),
-                              borderRadius: BorderRadius.circular(3),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Ask MQPal',
-                                style: _textTheme.labelLarge,
+                          child: GestureDetector(
+                            onTap: () {
+                              Provider.of<ExpandedProvider>(context,
+                                      listen: false)
+                                  .toggleExpanded();
+                            },
+                            child: Container(
+                              width: 180,
+                              height: 55,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFA6192E),
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Ask MQPal',
+                                  style: _textTheme.labelLarge,
+                                ),
                               ),
                             ),
                           ),
@@ -296,6 +307,27 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            Consumer<ExpandedProvider>(builder: (context, expandedProvider, _) {
+              return Visibility(
+                visible: expandedProvider.isExpanded,
+                child: Positioned.fill(
+                  child: Container(
+                    color: Colors.black.withOpacity(0.6),
+                    child: Center(
+                      child: Container(
+                        width: 400,
+                        height: 600,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const SingleChildScrollView(child: NewInquiry()),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            })
           ],
         ),
       ),
@@ -327,5 +359,11 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
