@@ -321,7 +321,9 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const SingleChildScrollView(child: NewInquiry()),
+                        child: const SingleChildScrollView(
+                          child: NewInquiry()
+                        ),
                       ),
                     ),
                   ),
