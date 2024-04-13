@@ -28,7 +28,7 @@ class NewInquiry extends StatelessWidget {
           child: Text(
             hintText,
             style: const TextStyle(
-              color: Colors.black,
+              color: Color(0xFF474747),
               fontSize: 16,
               fontFamily: 'Ubuntu',
               fontWeight: FontWeight.w400,
@@ -90,6 +90,46 @@ class NewInquiry extends StatelessWidget {
     );
   }
 
+  Widget buildAboutBox() {
+    return Container(
+      width: 400,
+      height: 150,
+      child: const Column(
+        children: [
+          SizedBox(
+            width: 400,
+            height: 37,
+            child: Text(
+              'About Inquiries',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontFamily: 'Ubuntu',
+                fontWeight: FontWeight.w400,
+                height: 0,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 100,
+            child: Text(
+              'You may ask about anything as long it is in relation to your studies and experiences on campus! Make sure you provide all relevant details. Keep in mind that your inquiry may be used for training purposed. If you wish for your inquiries to be confidential, ensure you tick the confidentiality box.\n',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontFamily: 'Ubuntu',
+                fontWeight: FontWeight.w400,
+                height: 0,
+              ),
+            ),
+          ),
+
+        ],
+      ),
+    );
+  }
+
   Widget buildSubmitButton() {
     return Container(
       width: 154,
@@ -140,15 +180,13 @@ class NewInquiry extends StatelessWidget {
                 ),
               ),
               const Divider(
-                thickness: 2,
+                thickness: 3,
                 color: Color(0x66A6192E),
               ),
+              buildAboutBox(),
               const SizedBox(height: 16),
               buildTextFieldWithLabel('Title', 'Example title'),
-              const Divider(
-                thickness: 3,
-                color: Color(0xFFA6192E),
-              ),
+              const SizedBox(height: 10),
               buildDescriptionField(),
               const SizedBox(height: 16),
               buildSubmitButton(),
