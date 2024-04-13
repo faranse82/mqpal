@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:mqpal/expanded_provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ExpandedProvider(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
