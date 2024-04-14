@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/state.dart';
 import 'package:provider/provider.dart';
+import 'package:mqpal/screens/inquiry_success.dart';
 
 class NewInquiry extends StatefulWidget {
   const NewInquiry({super.key});
@@ -112,7 +113,63 @@ class _NewInquiryState extends State<NewInquiry> {
   Widget buildSubmitButton(double screenWidth, double screenHeight) {
     return Center(
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          if (_titleController.text.isEmpty ||
+              _descriptionController.text.isEmpty) {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Missing Information'),
+                content: const Text(
+                    'Please fill out both the title and description fields.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Confirmation'),
+                content:
+                    const Text('Are you sure you want to submit the question?'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context); // Close the confirmation dialog
+                    },
+                    child: const Text('No'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Navigate to the InquirySuccessScreen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InquirySuccessScreen(
+                            title: _titleController.text,
+                            description: _descriptionController.text,
+                            dateAndTime: DateTime.now().microsecondsSinceEpoch,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Yes',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
         child: Container(
           height: screenHeight * 0.05,
           width: screenWidth * 0.35,
@@ -156,11 +213,11 @@ class _NewInquiryState extends State<NewInquiry> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        left: screenWidth * 1, top: screenHeight * 1),
+                        left: screenWidth * 0.35, top: screenHeight * 0.003),
                     child: GestureDetector(
                       onTap: () {
                         Provider.of<StateModel>(context, listen: false)
-                            .toggleMap();
+                            .toggleInquiryForm();
                       },
                       child: Container(
                         width: screenWidth * 0.08,
