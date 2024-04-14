@@ -3,11 +3,13 @@ import 'package:flutter/foundation.dart';
 class StateModel with ChangeNotifier {
   bool _isExpanded = false;
   bool _isMapOpen = false;
+  bool _isDarkMode = false;
+
 
   // Getters
   bool get isExpanded => _isExpanded;
   bool get isMapOpen => _isMapOpen;
-
+  bool get isDarkMode => _isDarkMode;
   // Setters
 
   void toggleExpanded() {
@@ -16,8 +18,13 @@ class StateModel with ChangeNotifier {
   }
 
   void toggleMap() {
-    // Do something to open a map
     _isMapOpen = !_isMapOpen;
     notifyListeners();
   }
+
+  void toggleDarkMode() {
+    _isDarkMode = !_isDarkMode;
+    notifyListeners();
+  } 
+
 }
