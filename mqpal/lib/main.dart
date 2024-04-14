@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:mqpal/expanded_provider.dart';
+import 'package:mqpal/state.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => ExpandedProvider(),
+      create: (_) => StateModel(),
       child: const MainApp(),
     ),
   );
