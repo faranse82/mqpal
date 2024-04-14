@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mqpal/expanded_provider.dart';
+import 'package:mqpal/state.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/widgets/inquiry.dart';
+import 'package:mqpal/widgets/map.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -53,20 +54,20 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-        width: 960,
-        height: 1948,
+        width: screenWidth,
+        height: screenHeight,
         decoration: const BoxDecoration(color: Colors.white),
         child: Stack(
           children: [
             // Top header
             Positioned(
-              left: 0,
-              top: 0,
               child: Container(
-                width: 480,
-                height: 120,
+                width: screenWidth,
+                height: 0.12 * screenHeight,
                 decoration: BoxDecoration(
                   color: const Color(0xFFA6192E),
                   border: Border.all(
@@ -82,20 +83,43 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 35),
-                    child: Text('MQPal', style: _textTheme.titleLarge),
-                  ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: screenHeight * 0.05, left: 12),
+                      child: Text('MQPal', style: _textTheme.titleLarge),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: screenHeight * 0.056, left: screenWidth * 0.5),
+                      child: GestureDetector(
+                        onTap: () {
+                          Provider.of<StateModel>(context, listen: false)
+                              .toggleMap();
+                        },
+                        child: Container(
+                          width: 55,
+                          height: 55,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/map.png'),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
             Positioned(
               left: 23,
-              top: 124,
+              top: screenHeight * 0.124,
               child: Text(
                 'Hi Faran!',
-                textAlign: TextAlign.center,
                 style: _textTheme.displayLarge,
               ),
             ),
@@ -104,13 +128,13 @@ class HomeScreen extends StatelessWidget {
             Positioned(
               left: 23,
               right: 23,
-              top: 190,
+              top: screenHeight * 0.19,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     width: 430,
-                    height: 270,
+                    height: 0.2771 * screenHeight,
                     decoration: BoxDecoration(
                       color: const Color(0xFFDEE2E6),
                       border: Border.all(
@@ -136,8 +160,8 @@ class HomeScreen extends StatelessWidget {
                           right: 16,
                           top: 70,
                           child: Container(
-                            width: 370,
-                            height: 150,
+                            width: screenWidth * 0.8,
+                            height: screenHeight * 0.15,
                             decoration: BoxDecoration(
                               image: const DecorationImage(
                                 image: AssetImage('assets/images/coffee.png'),
@@ -153,7 +177,7 @@ class HomeScreen extends StatelessWidget {
                         Positioned(
                           left: 16,
                           right: 16,
-                          top: 225,
+                          top: screenHeight * 0.225,
                           child: Text(
                             'St Laurent Coffee',
                             style: _textTheme.bodyMedium,
@@ -186,13 +210,13 @@ class HomeScreen extends StatelessWidget {
             Positioned(
               left: 23,
               right: 23,
-              top: 480,
+              top: screenHeight * 0.48,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 430,
-                    height: 320,
+                    width: screenWidth * 0.9,
+                    height: screenHeight * 0.3283,
                     decoration: BoxDecoration(
                       color: const Color(0xFFDEE2E6),
                       border: Border.all(
@@ -225,20 +249,19 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 150,
-                            right: 150,
-                            top: 240,
+                          padding: EdgeInsets.only(
+                            left: screenWidth * 0.30,
+                            right: screenWidth * 0.30,
+                            top: screenHeight * 0.24,
                           ),
                           child: GestureDetector(
                             onTap: () {
-                              Provider.of<ExpandedProvider>(context,
-                                      listen: false)
+                              Provider.of<StateModel>(context, listen: false)
                                   .toggleExpanded();
                             },
                             child: Container(
-                              width: 180,
-                              height: 55,
+                              width: screenWidth * 0.5,
+                              height: screenHeight * 0.05,
                               decoration: BoxDecoration(
                                 color: const Color(0xFFA6192E),
                                 borderRadius: BorderRadius.circular(3),
@@ -253,8 +276,8 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                            top: 316,
+                          padding: EdgeInsets.only(
+                            top: screenHeight * 0.324,
                           ),
                           child: Container(
                             decoration: const ShapeDecoration(
@@ -280,8 +303,8 @@ class HomeScreen extends StatelessWidget {
               left: 0,
               bottom: 0,
               child: Container(
-                width: 480,
-                height: 86,
+                width: screenWidth,
+                height: screenHeight * 0.087,
                 decoration: BoxDecoration(
                   color: const Color(0xFFA31313),
                   border: Border.all(
@@ -307,29 +330,67 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Consumer<ExpandedProvider>(builder: (context, expandedProvider, _) {
+            Consumer<StateModel>(
+              builder: (context, expandedProvider, _) {
+                return Visibility(
+                  visible: expandedProvider.isExpanded,
+                  child: Positioned.fill(
+                    child: Container(
+                      color: Colors.black.withOpacity(0.6),
+                      child: Center(
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            double containerWidth = screenWidth * 0.93;
+                            double containerHeight = screenHeight * 0.741;
+
+                            return Container(
+                              width: containerWidth,
+                              height: containerHeight,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const SingleChildScrollView(
+                                child: NewInquiry(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            Consumer<StateModel>(builder: (context, mapProvider, _) {
               return Visibility(
-                visible: expandedProvider.isExpanded,
+                visible: mapProvider.isMapOpen,
                 child: Positioned.fill(
                   child: Container(
                     color: Colors.black.withOpacity(0.6),
                     child: Center(
-                      child: Container(
-                        width: 400,
-                        height: 600,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const SingleChildScrollView(
-                          child: NewInquiry()
-                        ),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          double containerWidth = screenWidth * 0.95;
+                          double containerHeight = screenHeight * 0.308;
+                          return Container(
+                            width: containerWidth,
+                            height: containerHeight,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const SingleChildScrollView(
+                              child: Map(),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
                 ),
               );
-            })
+            }),
           ],
         ),
       ),
@@ -361,11 +422,5 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
   }
 }
