@@ -7,50 +7,7 @@ import 'package:mqpal/widgets/map.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  static const _textTheme = TextTheme(
-    displayLarge: TextStyle(
-      color: Colors.black,
-      fontSize: 50,
-      fontFamily: 'Ubuntu',
-      fontWeight: FontWeight.w400,
-    ),
-    displayMedium: TextStyle(
-      color: Colors.black,
-      fontSize: 36,
-      fontFamily: 'Ubuntu',
-      fontWeight: FontWeight.w400,
-    ),
-    bodyLarge: TextStyle(
-      color: Colors.black,
-      fontSize: 30,
-      fontFamily: 'Ubuntu',
-      fontWeight: FontWeight.w400,
-    ),
-    bodyMedium: TextStyle(
-      color: Color.fromARGB(255, 0, 0, 0),
-      fontSize: 26,
-      fontFamily: 'Ubuntu',
-      fontWeight: FontWeight.w400,
-    ),
-    labelMedium: TextStyle(
-      color: Colors.white,
-      fontSize: 16,
-      fontFamily: 'Ubuntu',
-      fontWeight: FontWeight.w400,
-    ),
-    labelLarge: TextStyle(
-      color: Colors.white,
-      fontSize: 18,
-      fontFamily: 'Ubuntu',
-      fontWeight: FontWeight.w400,
-    ),
-    titleLarge: TextStyle(
-      color: Colors.white,
-      fontSize: 50,
-      fontFamily: 'Ubuntu',
-      fontWeight: FontWeight.w400,
-    ),
-  );
+  
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +17,7 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         width: screenWidth,
         height: screenHeight,
-        decoration: const BoxDecoration(color: Colors.white),
+        decoration:  BoxDecoration(color: Theme.of(context).colorScheme.background),//background
         child: Stack(
           children: [
             // Top header
@@ -69,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                 width: screenWidth,
                 height: 0.12 * screenHeight,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFA6192E),
+                  color: Theme.of(context).colorScheme.primary,//top nav
                   border: Border.all(
                     color: Colors.black.withOpacity(0.25),
                     width: 1,
@@ -89,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                     Padding(
                       padding:
                           EdgeInsets.only(top: screenHeight * 0.05, left: 12),
-                      child: Text('MQPal', style: _textTheme.titleLarge),
+                      child: Text('MQPal', style: Theme.of(context).textTheme.titleLarge),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
@@ -120,7 +77,26 @@ class HomeScreen extends StatelessWidget {
               top: screenHeight * 0.124,
               child: Text(
                 'Hi Faran!',
-                style: _textTheme.displayLarge,
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
+            ),
+
+            Positioned(
+              child: GestureDetector(
+                onTap: () {
+                  Provider.of<StateModel>(context, listen: false)
+                      .toggleDarkMode();
+                },
+                child: Container(
+                  width: 70,
+                  height: 70,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/toggleDark.png'),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
               ),
             ),
 
@@ -136,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                     width: 430,
                     height: 0.2771 * screenHeight,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFDEE2E6),
+                      color: Theme.of(context).colorScheme.surface, //widget
                       border: Border.all(
                         color: Colors.black.withOpacity(0.2),
                         width: 1,
@@ -152,7 +128,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: Text(
                             'Need caffeine?',
-                            style: _textTheme.displayMedium,
+                            style: Theme.of(context).textTheme.displayMedium,
                           ),
                         ),
                         Positioned(
@@ -180,7 +156,7 @@ class HomeScreen extends StatelessWidget {
                           top: screenHeight * 0.225,
                           child: Text(
                             'St Laurent Coffee',
-                            style: _textTheme.bodyMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                         Padding(
@@ -188,12 +164,12 @@ class HomeScreen extends StatelessWidget {
                             top: 266,
                           ),
                           child: Container(
-                            decoration: const ShapeDecoration(
+                            decoration: ShapeDecoration(
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
                                   width: 2,
                                   strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: Color(0xFFA6192E),
+                                  color: Theme.of(context).colorScheme.secondary,  //divider bar
                                 ),
                               ),
                             ),
@@ -218,7 +194,8 @@ class HomeScreen extends StatelessWidget {
                     width: screenWidth * 0.9,
                     height: screenHeight * 0.3283,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFDEE2E6),
+                      borderRadius: BorderRadius.circular(8),
+                      color: Theme.of(context).colorScheme.surface,
                       border: Border.all(
                         color: Colors.black.withOpacity(0.2),
                         width: 1,
@@ -234,7 +211,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: Text(
                             'Inquiries',
-                            style: _textTheme.displayMedium,
+                            style: Theme.of(context).textTheme.displayMedium,
                           ),
                         ),
                         Padding(
@@ -245,7 +222,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: Text(
                             'Have a question about your studies?\nSubmit and inquiry and we will help you out!',
-                            style: _textTheme.bodyMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                         Padding(
@@ -263,13 +240,13 @@ class HomeScreen extends StatelessWidget {
                               width: screenWidth * 0.5,
                               height: screenHeight * 0.05,
                               decoration: BoxDecoration(
-                                color: const Color(0xFFA6192E),
-                                borderRadius: BorderRadius.circular(3),
+                                color: Theme.of(context).colorScheme.secondary,
+                                borderRadius: BorderRadius.circular(8),
                               ),
                               child: Center(
                                 child: Text(
                                   'Ask MQPal',
-                                  style: _textTheme.labelLarge,
+                                  style: Theme.of(context).textTheme.labelLarge,
                                 ),
                               ),
                             ),
@@ -280,12 +257,16 @@ class HomeScreen extends StatelessWidget {
                             top: screenHeight * 0.324,
                           ),
                           child: Container(
-                            decoration: const ShapeDecoration(
+                            decoration:  ShapeDecoration(
                               shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+
                                 side: BorderSide(
                                   width: 2,
                                   strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: Color(0xFFA6192E),
+                                  
+
+                                  color: Theme.of(context).colorScheme.secondary,
                                 ),
                               ),
                             ),
@@ -306,7 +287,7 @@ class HomeScreen extends StatelessWidget {
                 width: screenWidth,
                 height: screenHeight * 0.087,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFA31313),
+                  color: Theme.of(context).colorScheme.primary,
                   border: Border.all(
                     color: Colors.black.withOpacity(0.25),
                     width: 1,
