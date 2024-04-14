@@ -6,7 +6,7 @@ import 'package:mqpal/state.dart';
 final lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
     primary: Color.fromARGB(255, 166, 25, 06),
-    onPrimary: Colors.white,
+    onPrimary: Color.fromARGB(255, 255, 255, 255),
     background: Colors.white,
     onBackground: Colors.white,
     secondary: Color.fromARGB(255, 166, 25, 06),
