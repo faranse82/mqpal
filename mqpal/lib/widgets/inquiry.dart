@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mqpal/state.dart';
+import 'package:provider/provider.dart';
 
 class NewInquiry extends StatefulWidget {
   const NewInquiry({super.key});
@@ -21,19 +23,15 @@ class _NewInquiryState extends State<NewInquiry> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             label,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.w400,
-            ),
+            style: Theme.of(context).textTheme.displaySmall,
           ),
         ),
         Container(
           width: double.infinity,
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 1, color: Color(0xFF939393)),
+              side: BorderSide(
+                  width: 1, color: Theme.of(context).colorScheme.onSurface),
               borderRadius: BorderRadius.circular(5),
             ),
           ),
@@ -44,68 +42,48 @@ class _NewInquiryState extends State<NewInquiry> {
               border: InputBorder.none,
               hintText: 'Enter your $label',
             ),
-            style: const TextStyle(
-              color: Color(0xFF474747),
-              fontSize: 16,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.w400,
-            ),
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
       ],
     );
   }
 
-  Widget buildDescriptionField() {
+  Widget buildDescriptionField(double screenHeight) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             'Description',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.w400,
-            ),
+            style: Theme.of(context).textTheme.displaySmall,
           ),
         ),
         Container(
-          height: 150,
+          height: screenHeight * 0.155,
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 1, color: Color(0xFF939393)),
+              side: BorderSide(
+                  width: 1, color: Theme.of(context).colorScheme.onSurface),
               borderRadius: BorderRadius.circular(5),
             ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: TextField(
-            controller: _descriptionController,
-            maxLines: null,
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              hintText: 'Enter your description',
-            ),
-            style: const TextStyle(
-              color: Color(0xFF474747),
-              fontSize: 16,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+              controller: _descriptionController,
+              maxLines: null,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Enter your description',
+              ),
+              style: Theme.of(context).textTheme.bodySmall),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 4.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
           child: Text(
             'Briefly describe your concern',
-            style: TextStyle(
-              color: Color(0xFF505050),
-              fontSize: 12,
-              fontFamily: 'Roboto Serif',
-              fontWeight: FontWeight.w400,
-            ),
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ),
       ],
@@ -113,56 +91,40 @@ class _NewInquiryState extends State<NewInquiry> {
   }
 
   Widget buildAboutBox() {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 10),
           child: Text(
             'About Inquiries',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.w400,
-              height: 0,
-            ),
+            style: Theme.of(context).textTheme.displaySmall,
           ),
         ),
         Text(
           'You may ask about anything as long it is in relation to your studies and experiences on campus! Make sure you provide all relevant details. Keep in mind that your inquiry may be used for training purposes. If you wish for your inquiries to be confidential, ensure that you mention that in your inquiry.\n',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 17,
-            fontFamily: 'Ubuntu',
-            fontWeight: FontWeight.w400,
-            height: 0,
-          ),
+          style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
     );
   }
 
-  Widget buildSubmitButton() {
-    return GestureDetector(
-      onTap: () {
-        // TODO: Submit inquiry
-      },
-      child: Container(
-        width: double.infinity,
-        height: 49,
-        decoration: ShapeDecoration(
-          color: const Color(0xFFA6192E),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-        ),
-        child: const Center(
-          child: Text(
-            'Submit',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 28,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.w400,
+  Widget buildSubmitButton(double screenWidth, double screenHeight) {
+    return Center(
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          height: screenHeight * 0.05,
+          width: screenWidth * 0.35,
+          decoration: ShapeDecoration(
+            color: Theme.of(context).colorScheme.secondary,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+          ),
+          child: Center(
+            child: Text(
+              style: Theme.of(context).textTheme.labelLarge,
+              'Submit',
             ),
           ),
         ),
@@ -172,44 +134,60 @@ class _NewInquiryState extends State<NewInquiry> {
 
   @override
   Widget build(context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: const Color(0xFFDEE2E6),
-          border: Border.all(
-            width: 1,
-            color: Colors.black.withOpacity(0.2),
-          ),
+          color: Theme.of(context).colorScheme.surface,
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Inquiry Form',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 34,
-                  fontFamily: 'Ubuntu',
-                  fontWeight: FontWeight.w400,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    style: Theme.of(context).textTheme.displayMedium,
+                    'Inquiry Form',
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: screenWidth * 1, top: screenHeight * 1),
+                    child: GestureDetector(
+                      onTap: () {
+                        Provider.of<StateModel>(context, listen: false)
+                            .toggleMap();
+                      },
+                      child: Container(
+                        width: screenWidth * 0.08,
+                        height: screenHeight * 0.04,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/close.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const Divider(
+              Divider(
                 thickness: 3,
-                color: Color(0x66A6192E),
+                color: Theme.of(context).colorScheme.secondary,
               ),
               buildAboutBox(),
-              const SizedBox(height: 16),
+              SizedBox(height: screenHeight * 0.01),
               buildTextFieldWithLabel('Title', _titleController),
-              const SizedBox(height: 10),
-              buildDescriptionField(),
-              const SizedBox(height: 16),
-              buildSubmitButton(),
-              const SizedBox(
-                height: 24,
-              ),
+              SizedBox(height: screenHeight * 0.01),
+              buildDescriptionField(screenHeight),
+              SizedBox(height: screenHeight * 0.01),
+              buildSubmitButton(screenWidth, screenHeight),
+              SizedBox(height: screenHeight * 0.01),
             ],
           ),
         ),

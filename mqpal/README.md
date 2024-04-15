@@ -12,6 +12,7 @@ Main Functionalities
 Differences since original design:
  - CHANGED -> The inquiry submission form is now a pop-up form instead of a whole new page. This is done to prevent overwhelming the user with too many pages.
  - ADDED -> Interactive campus map
+ - ADDED -> Dark Mode
 
 Devices used to develop:
  - Large Android
