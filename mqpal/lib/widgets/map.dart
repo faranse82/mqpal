@@ -1,47 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:mqpal/state.dart';
+import 'package:provider/provider.dart';
 
 class Map extends StatelessWidget {
   const Map({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    final isDarkMode = Provider.of<StateModel>(context).isDarkMode;
+
     return Expanded(
       child: Expanded(
           child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: const Color(0xFFDEE2E6),
+          color: Theme.of(context).colorScheme.surface,
           border: Border.all(
             width: 1,
             color: Colors.black.withOpacity(0.2),
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(screenHeight * 0.017),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'MQU Campus Guide',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 34,
-                  fontFamily: 'Ubuntu',
-                  fontWeight: FontWeight.w400,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'MQU Campus Guide',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: screenWidth * 0.2, top: screenHeight * 0.006),
+                    child: GestureDetector(
+                      onTap: () {
+                        Provider.of<StateModel>(context, listen: false)
+                            .toggleMap();
+                      },
+                      child: Container(
+                        width: screenWidth * 0.08,
+                        height: screenHeight * 0.04,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              isDarkMode
+                                  ? 'assets/images/close.png'
+                                  : 'assets/images/close_dark.png',
+                            ),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const Text(
+              Text(
                 '(Zoom in for a better view)',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontFamily: 'Ubuntu',
-                  fontWeight: FontWeight.w400,
-                ),
+                style: Theme.of(context).textTheme.labelSmall,
               ),
+              SizedBox(height: screenHeight * 0.005),
               Positioned(
-                top: 200,
-                left: 100,
+                top: screenHeight * 0.05,
+                left: screenWidth * 0.05,
                 child: InteractiveViewer(
                   panEnabled: false,
                   boundaryMargin: const EdgeInsets.all(100),
@@ -49,8 +75,8 @@ class Map extends StatelessWidget {
                   maxScale: 3.5,
                   child: Image.asset(
                     'assets/images/mq-campus-map.png',
-                    width: 200,
-                    height: 200,
+                    width: screenWidth * 0.88,
+                    height: screenHeight * 0.32,
                     fit: BoxFit.cover,
                   ),
                 ),
