@@ -83,7 +83,7 @@ final darkTheme = ThemeData(
     primary: Color.fromARGB(255, 34, 34, 34),
     onPrimary: Color.fromARGB(255, 88, 85, 85),
     background: Color.fromARGB(255, 21, 21, 21),
-    onBackground: Color.fromARGB(255, 27, 27, 27),
+    onBackground: Color.fromARGB(255, 89, 89, 89),
     surface: Color.fromARGB(255, 48, 48, 48),
     onSurface: Color.fromARGB(255, 128, 128, 128),
   ),

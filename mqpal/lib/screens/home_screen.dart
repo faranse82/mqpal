@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/widgets/inquiry.dart';
@@ -94,6 +95,7 @@ class HomeScreen extends StatelessWidget {
                     width: 430,
                     height: 0.2771 * screenHeight,
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
                       color: Theme.of(context).colorScheme.surface, //widget
                       border: Border.all(
                         color: Colors.black.withOpacity(0.2),
@@ -295,7 +297,15 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _buildNavButton('Inquiries', 'inquiries.png', () {}),
+                    _buildNavButton('Inquiries', 'inquiries.png', () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const SubmittedInquiriesScreen(),
+                        ),
+                      );
+                    }),
                     _buildNavButton('Home', 'home-page.png', () {}),
                     _buildNavButton('Map', 'map.png', () {
                       Provider.of<StateModel>(context, listen: false)

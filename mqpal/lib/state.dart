@@ -6,6 +6,7 @@ class StateModel with ChangeNotifier {
   bool _isDarkMode = false;
   bool _isSuccessInq = false;
   bool _hasAnswered = false;
+  List<String> _inquiries = [];
 
   // Getters
   bool get isExpanded => _isExpanded;
@@ -13,6 +14,8 @@ class StateModel with ChangeNotifier {
   bool get isDarkMode => _isDarkMode;
   bool get isSuccessInq => _isSuccessInq;
   bool get hasAnswered => _hasAnswered;
+  List<String> get inquiries => _inquiries;
+
   // Setters
 
   void toggleInquiryForm() {
@@ -29,6 +32,7 @@ class StateModel with ChangeNotifier {
     _hasAnswered = !hasAnswered;
     notifyListeners();
   }
+
   void resetInquiryForm() {
     _isSuccessInq = false;
     notifyListeners();
@@ -41,6 +45,11 @@ class StateModel with ChangeNotifier {
 
   void toggleDarkMode() {
     _isDarkMode = !_isDarkMode;
+    notifyListeners();
+  }
+
+  void addInquiry(String inquiry) {
+    _inquiries.add(inquiry);
     notifyListeners();
   }
 }

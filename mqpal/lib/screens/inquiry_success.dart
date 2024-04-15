@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
+import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class InquirySuccessScreen extends StatelessWidget {
   final String title;
   final String description;
   final int dateAndTime;
-
 
   const InquirySuccessScreen(
       {super.key,
@@ -16,17 +17,32 @@ class InquirySuccessScreen extends StatelessWidget {
       required this.description,
       required this.dateAndTime});
 
-  @override
-  Widget build(BuildContext context) {
+  Future<void> saveInquiryInfo() async {
+    final prefs = await SharedPreferences.getInstance();
+    final inquiries = prefs.getStringList('inquiries') ?? [];
     final dateFormat = DateFormat('dd/MM/yyyy');
     final timeFormat = DateFormat('hh:mm a');
     final String formattedDate =
         dateFormat.format(DateTime.fromMicrosecondsSinceEpoch(dateAndTime));
     final String formattedTime =
         timeFormat.format(DateTime.fromMicrosecondsSinceEpoch(dateAndTime));
+    final inquiry = '$title|||$description|||$formattedDate|||$formattedTime';
+    inquiries.add(inquiry);
+
+    await prefs.setStringList('inquiries', inquiries);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
+    final dateFormat = DateFormat('dd/MM/yyyy');
+    final timeFormat = DateFormat('hh:mm a');
+    final String formattedDate =
+        dateFormat.format(DateTime.fromMicrosecondsSinceEpoch(dateAndTime));
+    final String formattedTime =
+        timeFormat.format(DateTime.fromMicrosecondsSinceEpoch(dateAndTime));
+    saveInquiryInfo();
     return Scaffold(
       body: Container(
         width: screenWidth,
@@ -204,6 +220,14 @@ class InquirySuccessScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16),
               child: GestureDetector(
                 onTap: () {
+                  final inquiry =
+                      '$title|||$description|||$formattedDate|||$formattedTime';
+                  Provider.of<StateModel>(context, listen: false)
+                      .addInquiry(inquiry);
+
+                  Provider.of<StateModel>(context, listen: false)
+                      .toggleInquiryForm();
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -250,10 +274,7 @@ class InquirySuccessScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildNavButton('Inquiries', 'inquiries.png', () {}),
-            _buildNavButton('Home', 'home-page.png', () {
-              Provider.of<StateModel>(context, listen: false)
-                  .toggleInquiryForm();
-            }),
+            _buildNavButton('Home', 'home-page.png', () {}),
             _buildNavButton('Map', 'map.png', () {
               Provider.of<StateModel>(context, listen: false).toggleMap();
             }),

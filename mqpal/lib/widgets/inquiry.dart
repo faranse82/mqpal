@@ -119,15 +119,25 @@ class _NewInquiryState extends State<NewInquiry> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
+                backgroundColor: Theme.of(context).colorScheme.onBackground,
                 title: const Text('Missing Information'),
                 content: const Text(
                     'Please fill out both the title and description fields.'),
                 actions: [
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('OK'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    child: Text(
+                      'OK',
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
                   ),
                 ],
               ),
@@ -136,19 +146,28 @@ class _NewInquiryState extends State<NewInquiry> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
+                backgroundColor: Theme.of(context).colorScheme.onBackground,
                 title: const Text('Confirmation'),
                 content:
                     const Text('Are you sure you want to submit the question?'),
                 actions: [
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context); // Close the confirmation dialog
                     },
-                    child: const Text('No'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    child: Text(
+                      'No',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () {
-                      // Navigate to the InquirySuccessScreen
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -160,9 +179,15 @@ class _NewInquiryState extends State<NewInquiry> {
                         ),
                       );
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
                     child: Text(
                       'Yes',
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),
                 ],
