@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/state.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 final lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
@@ -152,7 +153,12 @@ final darkTheme = ThemeData(
   ),
 );
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final stateModel = StateModel();
+  await Firebase.initializeApp();
+  await stateModel.loadInquiries();
+
   runApp(
     ChangeNotifierProvider(
       create: (_) => StateModel(),

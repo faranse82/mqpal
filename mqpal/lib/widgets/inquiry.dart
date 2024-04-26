@@ -3,6 +3,38 @@ import 'package:mqpal/state.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/screens/inquiry_success.dart';
 
+class Inquiry {
+  final String title;
+  final String description;
+  final String date;
+  final String time;
+
+  Inquiry({
+    required this.title,
+    required this.description,
+    required this.date,
+    required this.time,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'date': date,
+      'time': time,
+    };
+  }
+
+  factory Inquiry.fromJson(Map<String, dynamic> json) {
+    return Inquiry(
+      title: json['title'],
+      description: json['description'],
+      date: json['date'],
+      time: json['time'],
+    );
+  }
+}
+
 class NewInquiry extends StatefulWidget {
   const NewInquiry({super.key});
 

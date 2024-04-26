@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1037381733761",
+    "project_id": "mqpal-project-664",
+    "storage_bucket": "mqpal-project-664.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037381733761:android:dd37fe756c5e880116ec80",
+        "android_client_info": {
+          "package_name": "com.example.mqpal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGzRMxlJvXep8zd6IQTwFNCgpFOz4P1bM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
