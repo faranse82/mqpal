@@ -22,30 +22,25 @@ class FirebaseStorageService {
       final downloadUrl = await snapshot.ref.getDownloadURL();
       return downloadUrl;
     } catch (e) {
-      print('Error uploading inquiries to Firebase Storage: $e');
       return '';
     }
   }
 
   static Future<List<Inquiry>> loadInquiriesFromStorage() async {
-    try {
-      final ref =
-          FirebaseStorage.instance.ref().child('inquiries/inquiries.json');
-      final downloadUrl = await ref.getDownloadURL();
-      final response = await http.get(Uri.parse(downloadUrl));
+  try {
+    final ref = FirebaseStorage.instance.ref().child('inquiries/inquiries.json');
+    final downloadUrl = await ref.getDownloadURL();
+    final response = await http.get(Uri.parse(downloadUrl));
 
-      if (response.statusCode == 200) {
-        final jsonData = response.body;
-        final List<dynamic> inquiriesJson = json.decode(jsonData);
-        return inquiriesJson.map((json) => Inquiry.fromJson(json)).toList();
-      } else {
-        print(
-            'Failed to load inquiries from Firebase Storage. Status code: ${response.statusCode}');
-        return [];
-      }
-    } catch (e) {
-      print('Error loading inquiries from Firebase Storage: $e');
+    if (response.statusCode == 200) {
+      final jsonData = response.body;
+      final List<dynamic> inquiriesJson = json.decode(jsonData);
+      return inquiriesJson.map((json) => Inquiry.fromJson(json)).toList();
+    } else {
       return [];
     }
+  } catch (e) {
+    return [];
   }
+}
 }

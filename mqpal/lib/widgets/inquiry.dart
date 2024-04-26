@@ -47,6 +47,28 @@ class _NewInquiryState extends State<NewInquiry> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
+  void _submitInquiry() {
+    final String title = _titleController.text;
+    final String description = _descriptionController.text;
+    final DateTime now = DateTime.now();
+    final String date = '${now.year}-${now.month}-${now.day}';
+    final String time = '${now.hour}:${now.minute}';
+
+    final Inquiry inquiry = Inquiry(
+      title: title,
+      description: description,
+      date: date,
+      time: time,
+    );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => InquirySuccessScreen(inquiry: inquiry),
+      ),
+    );
+  }
+  
   Widget buildTextFieldWithLabel(
       String label, TextEditingController controller) {
     return Column(
@@ -141,110 +163,94 @@ class _NewInquiryState extends State<NewInquiry> {
       ],
     );
   }
-
-  Widget buildSubmitButton(double screenWidth, double screenHeight) {
-    return Center(
-      child: GestureDetector(
-        onTap: () {
-          if (_titleController.text.isEmpty ||
-              _descriptionController.text.isEmpty) {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                backgroundColor: Theme.of(context).colorScheme.onBackground,
-                title: const Text('Missing Information'),
-                content: const Text(
-                    'Please fill out both the title and description fields.'),
-                actions: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                    child: Text(
-                      'OK',
-                      style: Theme.of(context).textTheme.labelMedium,
+Widget buildSubmitButton(double screenWidth, double screenHeight) {
+  return Center(
+    child: GestureDetector(
+      onTap: () {
+        if (_titleController.text.isEmpty || _descriptionController.text.isEmpty) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              backgroundColor: Theme.of(context).colorScheme.onBackground,
+              title: const Text('Missing Information'),
+              content: const Text('Please fill out both the title and description fields.'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
                     ),
                   ),
-                ],
-              ),
-            );
-          } else {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                backgroundColor: Theme.of(context).colorScheme.onBackground,
-                title: const Text('Confirmation'),
-                content:
-                    const Text('Are you sure you want to submit the question?'),
-                actions: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context); // Close the confirmation dialog
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.surface,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                    child: Text(
-                      'No',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
+                  child: Text(
+                    'OK',
+                    style: Theme.of(context).textTheme.labelMedium,
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => InquirySuccessScreen(
-                            title: _titleController.text,
-                            description: _descriptionController.text,
-                            dateAndTime: DateTime.now().microsecondsSinceEpoch,
-                          ),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                    child: Text(
-                      'Yes',
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-        },
-        child: Container(
-          height: screenHeight * 0.05,
-          width: screenWidth * 0.35,
-          decoration: ShapeDecoration(
-            color: Theme.of(context).colorScheme.secondary,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-          ),
-          child: Center(
-            child: Text(
-              style: Theme.of(context).textTheme.labelLarge,
-              'Submit',
+                ),
+              ],
             ),
+          );
+        } else {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              backgroundColor: Theme.of(context).colorScheme.onBackground,
+              title: const Text('Confirmation'),
+              content: const Text('Are you sure you want to submit the question?'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Close the confirmation dialog
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  child: Text(
+                    'No',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _submitInquiry,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  child: Text(
+                    'Yes',
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      },
+      child: Container(
+        height: screenHeight * 0.05,
+        width: screenWidth * 0.35,
+        decoration: ShapeDecoration(
+          color: Theme.of(context).colorScheme.secondary,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+        ),
+        child: Center(
+          child: Text(
+            style: Theme.of(context).textTheme.labelLarge,
+            'Submit',
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
   @override
   Widget build(context) {

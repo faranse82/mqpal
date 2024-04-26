@@ -155,13 +155,13 @@ final darkTheme = ThemeData(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final stateModel = StateModel();
   await Firebase.initializeApp();
+  final stateModel = StateModel();
   await stateModel.loadInquiries();
 
   runApp(
     ChangeNotifierProvider(
-      create: (_) => StateModel(),
+      create: (_) => stateModel,
       child: const MainApp(),
     ),
   );

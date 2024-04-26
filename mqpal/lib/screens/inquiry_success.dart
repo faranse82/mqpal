@@ -7,43 +7,19 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InquirySuccessScreen extends StatelessWidget {
-  final String title;
-  final String description;
-  final int dateAndTime;
+  final Inquiry inquiry;
 
-  const InquirySuccessScreen(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.dateAndTime});
+  const InquirySuccessScreen({
+    super.key,
+    required this.inquiry,
+  });
 
-  Future<void> saveInquiryInfo() async {
-    final prefs = await SharedPreferences.getInstance();
-    final inquiries = prefs.getStringList('inquiries') ?? [];
-    final dateFormat = DateFormat('dd/MM/yyyy');
-    final timeFormat = DateFormat('hh:mm a');
-    final String formattedDate =
-        dateFormat.format(DateTime.fromMicrosecondsSinceEpoch(dateAndTime));
-    final String formattedTime =
-        timeFormat.format(DateTime.fromMicrosecondsSinceEpoch(dateAndTime));
-    final inquiry = '$title|||$description|||$formattedDate|||$formattedTime';
-    inquiries.add(inquiry);
-
-    await prefs.setStringList('inquiries', inquiries);
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    final dateFormat = DateFormat('dd/MM/yyyy');
-    final timeFormat = DateFormat('hh:mm a');
-    final String formattedDate =
-        dateFormat.format(DateTime.fromMicrosecondsSinceEpoch(dateAndTime));
-    final String formattedTime =
-        timeFormat.format(DateTime.fromMicrosecondsSinceEpoch(dateAndTime));
-    saveInquiryInfo();
-    return Scaffold(
+     return Scaffold(
       body: Container(
         width: screenWidth,
         height: screenHeight,
@@ -172,7 +148,7 @@ class InquirySuccessScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Title: $title',
+                          'Title: ${inquiry.title}',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                         SizedBox(height: screenHeight * 0.02),
@@ -196,7 +172,7 @@ class InquirySuccessScreen extends StatelessWidget {
                           ),
                           child: SingleChildScrollView(
                             child: Text(
-                              description,
+                              inquiry.description,
                               textAlign: TextAlign.justify,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
@@ -206,7 +182,7 @@ class InquirySuccessScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 12),
                           child: Text(
-                            'Date and time submitted: \n  - $formattedTime, $formattedDate',
+                            'Date and time submitted: \n  - ${inquiry.time}, ${inquiry.date}',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         )
@@ -220,12 +196,7 @@ class InquirySuccessScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16),
               child: GestureDetector(
                 onTap: () {
-                  final inquiry = Inquiry(
-                    title: title,
-                    description: description,
-                    date: formattedDate,
-                    time: formattedTime,
-                  );
+                  
                   Provider.of<StateModel>(context, listen: false)
                       .addInquiry(inquiry);
 
