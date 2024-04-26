@@ -1,12 +1,15 @@
 import 'package:flutter/foundation.dart';
+import 'package:mqpal/firebase_cloud_storage.dart';
+import 'package:mqpal/widgets/inquiry.dart';
 
 class StateModel with ChangeNotifier {
   bool _isExpanded = false;
   bool _isMapOpen = false;
   bool _isDarkMode = false;
   bool _isSuccessInq = false;
+  String _userId = '';
   bool _hasAnswered = false;
-  List<String> _inquiries = [];
+  List<Inquiry> _inquiries = [];
 
   // Getters
   bool get isExpanded => _isExpanded;
@@ -14,7 +17,9 @@ class StateModel with ChangeNotifier {
   bool get isDarkMode => _isDarkMode;
   bool get isSuccessInq => _isSuccessInq;
   bool get hasAnswered => _hasAnswered;
-  List<String> get inquiries => _inquiries;
+  String get userId => _userId;
+
+  List<Inquiry> get inquiries => _inquiries;
 
   // Setters
 
@@ -48,8 +53,24 @@ class StateModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void addInquiry(String inquiry) {
+  void setUserId(String userId) {
+    _userId = userId;
+    notifyListeners();
+  }
+
+  Future<void> loadInquiries() async {
+    try {
+      _inquiries = await FirebaseStorageService.loadInquiriesFromStorage();
+      print('Loaded inquiries: $_inquiries');
+      notifyListeners();
+    } catch (e) {
+      print('Error loading inquiries: $e');
+    }
+  }
+
+  Future<void> addInquiry(Inquiry inquiry) async {
     _inquiries.add(inquiry);
+    await FirebaseStorageService.uploadInquiriesToStorage(_inquiries);
     notifyListeners();
   }
 }

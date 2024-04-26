@@ -1,54 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/state.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class SubmittedInquiriesScreen extends StatefulWidget {
-  final String? inquiry;
-
-  const SubmittedInquiriesScreen({super.key, this.inquiry});
-
-  @override
-  _SubmittedInquiriesScreenState createState() =>
-      _SubmittedInquiriesScreenState();
-}
-
-class _SubmittedInquiriesScreenState extends State<SubmittedInquiriesScreen> {
-  List<String> _inquiries = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadInquiries().then((_) {
-      if (widget.inquiry != null) {
-        _addInquiry(widget.inquiry!);
-      }
-    });
-  }
-
-  Future<void> _loadInquiries() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _inquiries = prefs.getStringList('inquiries') ?? [];
-    });
-  }
-
-  Future<void> _saveInquiries() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('inquiries', _inquiries);
-  }
-
-  void _addInquiry(String inquiry) {
-    setState(() {
-      _inquiries.add(inquiry);
-    });
-    _saveInquiries();
-  }
+class SubmittedInquiriesScreen extends StatelessWidget {
+  const SubmittedInquiriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    final inquiries = Provider.of<StateModel>(context).inquiries;
 
     return Scaffold(
       body: Container(
@@ -115,7 +76,7 @@ class _SubmittedInquiriesScreenState extends State<SubmittedInquiriesScreen> {
                         width: 1,
                       ),
                     ),
-                    child: _inquiries.isEmpty
+                    child: inquiries.isEmpty
                         ? Center(
                             child: Text(
                               'No inquiries found',
@@ -123,13 +84,9 @@ class _SubmittedInquiriesScreenState extends State<SubmittedInquiriesScreen> {
                             ),
                           )
                         : ListView.builder(
-                            itemCount: _inquiries.length,
+                            itemCount: inquiries.length,
                             itemBuilder: (context, index) {
-                              final inquiryParts =
-                                  _inquiries[index].split('|||');
-                              final title = inquiryParts[0];
-                              final date = inquiryParts[2];
-                              final time = inquiryParts[3];
+                              final inquiry = inquiries[index];
 
                               return Container(
                                 margin: const EdgeInsets.symmetric(
@@ -154,13 +111,13 @@ class _SubmittedInquiriesScreenState extends State<SubmittedInquiriesScreen> {
                                     ),
                                     SizedBox(height: screenHeight * 0.01),
                                     Text(
-                                      'In progress - $date, $time',
+                                      'In progress - ${inquiry.date}, ${inquiry.time}',
                                       style:
                                           Theme.of(context).textTheme.bodySmall,
                                     ),
                                     SizedBox(height: screenHeight * 0.01),
                                     Text(
-                                      title,
+                                      inquiry.title,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium,

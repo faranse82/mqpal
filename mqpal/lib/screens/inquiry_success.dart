@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
-import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
 import 'package:intl/intl.dart';
+import 'package:mqpal/widgets/inquiry.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -220,8 +220,12 @@ class InquirySuccessScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16),
               child: GestureDetector(
                 onTap: () {
-                  final inquiry =
-                      '$title|||$description|||$formattedDate|||$formattedTime';
+                  final inquiry = Inquiry(
+                    title: title,
+                    description: description,
+                    date: formattedDate,
+                    time: formattedTime,
+                  );
                   Provider.of<StateModel>(context, listen: false)
                       .addInquiry(inquiry);
 
