@@ -118,7 +118,7 @@ class InquirySuccessScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
                         Padding(
-                          padding:  EdgeInsets.only(left: screenWidth * 0.22),
+                          padding: EdgeInsets.only(left: screenWidth * 0.22),
                           child: Positioned(
                             child: IconButton(
                               icon: Icon(
@@ -215,9 +215,6 @@ class InquirySuccessScreen extends StatelessWidget {
                   Provider.of<StateModel>(context, listen: false)
                       .addInquiry(inquiry);
 
-                  Provider.of<StateModel>(context, listen: false)
-                      .toggleInquiryForm();
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -277,9 +274,6 @@ class InquirySuccessScreen extends StatelessWidget {
               }),
               _buildNavButton('Home', 'home-page.png', () {
                 Navigator.popUntil(context, (route) => route.isFirst);
-                Provider.of<StateModel>(context, listen: false)
-                      .toggleInquiryForm();
-
               }),
               _buildNavButton('Map', 'map.png', () {
                 Navigator.push(
