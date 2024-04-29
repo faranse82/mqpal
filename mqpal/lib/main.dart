@@ -9,7 +9,7 @@ final lightTheme = ThemeData(
     primary: Color.fromARGB(255, 166, 25, 06),
     onPrimary: Color.fromARGB(255, 255, 255, 255),
     background: Colors.white,
-    onBackground: Colors.white,
+    onBackground: Colors.white,  
     secondary: Color.fromARGB(255, 166, 25, 06),
     surface: Color.fromRGBO(222, 226, 230, 100),
     onSurface: Color.fromARGB(255, 147, 147, 147),

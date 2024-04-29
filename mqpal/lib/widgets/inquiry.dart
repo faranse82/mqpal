@@ -8,12 +8,14 @@ class Inquiry {
   final String description;
   final String date;
   final String time;
+  final String status;
 
   Inquiry({
     required this.title,
     required this.description,
     required this.date,
     required this.time,
+    required this.status,
   });
 
   Map<String, dynamic> toJson() {
@@ -22,6 +24,7 @@ class Inquiry {
       'description': description,
       'date': date,
       'time': time,
+      'status': status,
     };
   }
 
@@ -31,6 +34,7 @@ class Inquiry {
       description: json['description'],
       date: json['date'],
       time: json['time'],
+      status: json['status'] ?? 'In progress'
     );
   }
 }
@@ -53,16 +57,19 @@ class _NewInquiryState extends State<NewInquiry> {
     final DateTime now = DateTime.now();
     final String date = '${now.year}-${now.month}-${now.day}';
     final String time = '${now.hour}:${now.minute}';
+    final String status = 'In progress';
 
     final Inquiry inquiry = Inquiry(
       title: title,
       description: description,
       date: date,
       time: time,
+      status: status,
     );
 
     Navigator.push(
       context,
+      
       MaterialPageRoute(
         builder: (context) => InquirySuccessScreen(inquiry: inquiry),
       ),
@@ -213,7 +220,8 @@ class _NewInquiryState extends State<NewInquiry> {
                 actions: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context); // Close the confirmation dialog
+                      Navigator.pop(context); 
+                       // Close the confirmation dialog
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.surface,
