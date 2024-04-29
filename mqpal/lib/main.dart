@@ -13,6 +13,8 @@ final lightTheme = ThemeData(
     secondary: Color.fromARGB(255, 166, 25, 06),
     surface: Color.fromRGBO(222, 226, 230, 100),
     onSurface: Color.fromARGB(255, 147, 147, 147),
+    onError: Colors.white,
+    error: Colors.white,
   ),
   fontFamily: 'Ubuntu',
   textTheme: const TextTheme(
@@ -81,13 +83,14 @@ final lightTheme = ThemeData(
 
 final darkTheme = ThemeData(
   colorScheme: const ColorScheme.dark(
-    primary: Color.fromARGB(255, 34, 34, 34),
-    onPrimary: Color.fromARGB(255, 88, 85, 85),
-    background: Color.fromARGB(255, 21, 21, 21),
-    onBackground: Color.fromARGB(255, 89, 89, 89),
-    surface: Color.fromARGB(255, 48, 48, 48),
-    onSurface: Color.fromARGB(255, 128, 128, 128),
-  ),
+      primary: Color.fromARGB(255, 34, 34, 34),
+      onPrimary: Color.fromARGB(255, 88, 85, 85),
+      background: Color.fromARGB(255, 21, 21, 21),
+      onBackground: Color.fromARGB(255, 89, 89, 89),
+      surface: Color.fromARGB(255, 48, 48, 48),
+      onSurface: Color.fromARGB(255, 128, 128, 128),
+      onError: Color.fromARGB(255, 65, 65, 65),
+      error: Color.fromARGB(255, 255, 255, 255)),
   fontFamily: 'Ubuntu',
   textTheme: const TextTheme(
     titleLarge: TextStyle(

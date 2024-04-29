@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mqpal/screens/map_screen.dart';
 import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
 import 'package:provider/provider.dart';
@@ -306,10 +307,16 @@ class HomeScreen extends StatelessWidget {
                         ),
                       );
                     }),
-                    _buildNavButton('Home', 'home-page.png', () {}),
+                    _buildNavButton('Home', 'home-page.png', () {
+                      Navigator.popUntil(context, (route) => route.isFirst);
+                    }),
                     _buildNavButton('Map', 'map.png', () {
-                      Provider.of<StateModel>(context, listen: false)
-                          .toggleMap();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MapScreen(),
+                        ),
+                      );
                     }),
                   ],
                 ),
