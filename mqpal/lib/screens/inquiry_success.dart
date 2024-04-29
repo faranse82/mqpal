@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
+import 'package:mqpal/screens/map_screen.dart';
+import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
-import 'package:intl/intl.dart';
 import 'package:mqpal/widgets/inquiry.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class InquirySuccessScreen extends StatelessWidget {
   final Inquiry inquiry;
@@ -14,12 +14,32 @@ class InquirySuccessScreen extends StatelessWidget {
     required this.inquiry,
   });
 
- 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-     return Scaffold(
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(screenHeight * 0.09),
+        child: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Theme.of(context).colorScheme.error,
+              size: 45,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title:
+              Text('Ask MQPal!', style: Theme.of(context).textTheme.titleLarge),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          elevation: 0,
+          centerTitle: true,
+          toolbarHeight: screenHeight * 0.09,
+        ),
+      ),
       body: Container(
         width: screenWidth,
         height: screenHeight,
@@ -28,37 +48,6 @@ class InquirySuccessScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Container(
-              width: screenWidth,
-              height: screenHeight * 0.12,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.25),
-                  width: 1,
-                ),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x1E000000),
-                    blurRadius: 6,
-                    offset: Offset(0, 1),
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: screenHeight * 0.05),
-                    child: Text(
-                      'Ask MQPal!',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             SizedBox(height: screenHeight * 0.03),
             Container(
               width: screenWidth * 0.9,
@@ -196,7 +185,6 @@ class InquirySuccessScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16),
               child: GestureDetector(
                 onTap: () {
-                  
                   Provider.of<StateModel>(context, listen: false)
                       .addInquiry(inquiry);
 
@@ -228,32 +216,51 @@ class InquirySuccessScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        height: screenHeight * 0.087,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          border: Border.all(
-            color: Colors.black.withOpacity(0.25),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).colorScheme.primary,
-              blurRadius: 6,
-              offset: const Offset(0, -1),
-              spreadRadius: 0,
+      bottomNavigationBar: Positioned(
+        left: 0,
+        bottom: 0,
+        child: Container(
+          width: screenWidth,
+          height: screenHeight * 0.087,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            border: Border.all(
+              color: Colors.black.withOpacity(0.25),
+              width: 1,
             ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildNavButton('Inquiries', 'inquiries.png', () {}),
-            _buildNavButton('Home', 'home-page.png', () {}),
-            _buildNavButton('Map', 'map.png', () {
-              Provider.of<StateModel>(context, listen: false).toggleMap();
-            }),
-          ],
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.primary,
+                blurRadius: 6,
+                offset: const Offset(0, -1),
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildNavButton('Inquiries', 'inquiries.png', () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SubmittedInquiriesScreen(),
+                  ),
+                );
+              }),
+              _buildNavButton('Home', 'home-page.png', () {
+                Navigator.popUntil(context, (route) => route.isFirst);
+              }),
+              _buildNavButton('Map', 'map.png', () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MapScreen(),
+                  ),
+                );
+              }),
+            ],
+          ),
         ),
       ),
     );

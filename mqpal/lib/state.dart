@@ -59,13 +59,8 @@ class StateModel with ChangeNotifier {
   }
 
   Future<void> loadInquiries() async {
-    try {
-      _inquiries = await FirebaseStorageService.loadInquiriesFromStorage();
-      print('Loaded inquiries: $_inquiries');
-      notifyListeners();
-    } catch (e) {
-      print('Error loading inquiries: $e');
-    }
+    _inquiries = await FirebaseStorageService.loadInquiriesFromStorage();
+    notifyListeners();
   }
 
   Future<void> addInquiry(Inquiry inquiry) async {
