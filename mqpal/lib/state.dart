@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:mqpal/firebase_cloud_storage.dart';
 import 'package:mqpal/widgets/inquiry.dart';
 
@@ -68,7 +68,7 @@ class StateModel with ChangeNotifier {
     await FirebaseStorageService.uploadInquiriesToStorage(_inquiries);
     notifyListeners();
   }
-  
+
   void updateInquiry(Inquiry oldInquiry, Inquiry newInquiry) {
     final index = _inquiries.indexOf(oldInquiry);
     if (index != -1) {
@@ -76,5 +76,22 @@ class StateModel with ChangeNotifier {
       FirebaseStorageService.uploadInquiriesToStorage(_inquiries);
       notifyListeners();
     }
+  }
+
+  void popUpMessage(String transaction, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Inquiry $transaction successfully'),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height * 0.75,
+          left: MediaQuery.of(context).size.width * 0.05,
+          right: MediaQuery.of(context).size.width * 0.05,
+        ),
+      ),
+    );
   }
 }

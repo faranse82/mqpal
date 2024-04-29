@@ -30,12 +30,11 @@ class Inquiry {
 
   factory Inquiry.fromJson(Map<String, dynamic> json) {
     return Inquiry(
-      title: json['title'],
-      description: json['description'],
-      date: json['date'],
-      time: json['time'],
-      status: json['status'] ?? 'In progress'
-    );
+        title: json['title'],
+        description: json['description'],
+        date: json['date'],
+        time: json['time'],
+        status: json['status'] ?? 'In progress');
   }
 }
 
@@ -67,9 +66,10 @@ class _NewInquiryState extends State<NewInquiry> {
       status: status,
     );
 
+    Provider.of<StateModel>(context, listen: false).toggleInquiryForm();
+
     Navigator.push(
       context,
-      
       MaterialPageRoute(
         builder: (context) => InquirySuccessScreen(inquiry: inquiry),
       ),
@@ -220,8 +220,8 @@ class _NewInquiryState extends State<NewInquiry> {
                 actions: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context); 
-                       // Close the confirmation dialog
+                      Navigator.pop(context);
+                      // Close the confirmation dialog
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.surface,

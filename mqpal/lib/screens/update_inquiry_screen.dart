@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/map_screen.dart';
+import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
 import 'package:mqpal/widgets/inquiry.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,8 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: widget.inquiry.title);
-    _descriptionController = TextEditingController(text: widget.inquiry.description);
+    _descriptionController =
+        TextEditingController(text: widget.inquiry.description);
   }
 
   @override
@@ -34,36 +36,69 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
   }
 
   void _updateInquiry() {
-  final String updatedTitle = _titleController.text;
-  final String updatedDescription = _descriptionController.text;
+    final String updatedTitle = _titleController.text;
+    final String updatedDescription = _descriptionController.text;
 
-  final updatedInquiry = Inquiry(
-    title: updatedTitle,
-    description: updatedDescription,
-    date: widget.inquiry.date,
-    time: widget.inquiry.time,
-    status: widget.inquiry.status,
-  );
+    final updatedInquiry = Inquiry(
+      title: updatedTitle,
+      description: updatedDescription,
+      date: widget.inquiry.date,
+      time: widget.inquiry.time,
+      status: widget.inquiry.status,
+    );
 
-  Provider.of<StateModel>(context, listen: false).updateInquiry(widget.inquiry, updatedInquiry);
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.onError,
+        title: Text(
+          'Confirmation',
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
+        content: const Text('Are you sure you want to update the question?'),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              // Close the confirmation dialog
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            child: Text(
+              'No',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Provider.of<StateModel>(context, listen: false)
+                  .updateInquiry(widget.inquiry, updatedInquiry);
 
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: const Text('Inquiry updated successfully'),
-      behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+              Provider.of<StateModel>(context, listen: false)
+                  .popUpMessage('updated', context);
+
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            child: Text(
+              'Yes',
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
+          ),
+        ],
       ),
-      margin: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height * 0.1,
-        left: MediaQuery.of(context).size.width * 0.05,
-        right: MediaQuery.of(context).size.width * 0.05,
-      ),
-    ),
-  );
-
-  Navigator.pop(context);
-}
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +119,8 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
               Navigator.pop(context);
             },
           ),
-          title: Text('Update Inquiry', style: Theme.of(context).textTheme.titleLarge),
+          title: Text('Update Inquiry',
+              style: Theme.of(context).textTheme.titleLarge),
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
           centerTitle: true,
@@ -128,7 +164,8 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                   ),
                   SizedBox(height: screenHeight * 0.02),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -139,7 +176,8 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                         SizedBox(height: screenHeight * 0.01),
                         Container(
                           width: screenWidth * 0.8,
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 10),
                           decoration: ShapeDecoration(
                             shape: RoundedRectangleBorder(
                               side: BorderSide(
@@ -166,7 +204,8 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                         Container(
                           width: screenWidth * 0.8,
                           height: screenHeight * 0.35,
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 10),
                           decoration: ShapeDecoration(
                             shape: RoundedRectangleBorder(
                               side: BorderSide(
@@ -191,7 +230,6 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                 ],
               ),
             ),
-            
             GestureDetector(
               onTap: _updateInquiry,
               child: Container(
@@ -199,7 +237,8 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                 height: screenHeight * 0.06,
                 decoration: ShapeDecoration(
                   color: Theme.of(context).colorScheme.secondary,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(3)),
                 ),
                 child: Center(
                   child: Text(
@@ -210,54 +249,59 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
               ),
             ),
             SizedBox(height: screenHeight * 0.12606),
-            Positioned(
-              left: 0,
-              bottom: 0,
-              top: 330,
-              child: Container(
-                width: screenWidth,
-                height: screenHeight * 0.087,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.25),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Theme.of(context).colorScheme.primary,
-                      blurRadius: 6,
-                      offset: const Offset(0, -1),
-                      spreadRadius: 0,
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildNavButton('Inquiries', 'inquiries.png', () {
-                      
-                    }),
-                    _buildNavButton('Home', 'home-page.png', () {
-                      Navigator.popUntil(context, (route) => route.isFirst);
-                    }),
-                    _buildNavButton('Map', 'map.png', () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MapScreen(),
-                        ),
-                      );
-                    }),
-                  ],
-                ),
-              ),
-            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Positioned(
+        left: 0,
+        bottom: 0,
+        child: Container(
+          width: screenWidth,
+          height: screenHeight * 0.087,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            border: Border.all(
+              color: Colors.black.withOpacity(0.25),
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.primary,
+                blurRadius: 6,
+                offset: const Offset(0, -1),
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildNavButton('Inquiries', 'inquiries.png', () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SubmittedInquiriesScreen(),
+                  ),
+                );
+              }),
+              _buildNavButton('Home', 'home-page.png', () {
+                Navigator.popUntil(context, (route) => route.isFirst);
+              }),
+              _buildNavButton('Map', 'map.png', () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MapScreen(),
+                  ),
+                );
+              }),
+            ],
+          ),
         ),
       ),
     );
   }
+
   Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
