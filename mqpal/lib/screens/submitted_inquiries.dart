@@ -20,15 +20,14 @@ class SubmittedInquiriesScreen extends StatelessWidget {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Theme.of(context).colorScheme.error,
+              color: Theme.of(context).colorScheme.onPrimary,
               size: 45,
             ),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
-          title:
-              Text('Inquiries', style: Theme.of(context).textTheme.titleLarge),
+          title: Text('Inquiries', style: Theme.of(context).textTheme.titleLarge),
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
           centerTitle: true,
@@ -43,8 +42,6 @@ class SubmittedInquiriesScreen extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Top header
-
             // Past inquiries section
             Positioned(
               left: 23,
@@ -87,8 +84,7 @@ class SubmittedInquiriesScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          InquiryDetailsScreen(
-                                              inquiry: inquiry),
+                                          InquiryDetailsScreen(inquiry: inquiry),
                                     ),
                                   );
                                 },
@@ -97,42 +93,30 @@ class SubmittedInquiriesScreen extends StatelessWidget {
                                       top: 16, left: 16, right: 16),
                                   padding: const EdgeInsets.all(16),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .background
-                                        .withOpacity(0.7),
+                                    color: Theme.of(context).colorScheme.background,
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurface
-                                          .withOpacity(1),
+                                      color: Theme.of(context).colorScheme.onSurface,
                                       width: 1,
                                     ),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Inquiry ${index + 1}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displaySmall,
+                                        style:
+                                            Theme.of(context).textTheme.displaySmall,
                                       ),
                                       SizedBox(height: screenHeight * 0.01),
                                       Text(
-                                        'In progress - ${inquiry.date}, ${inquiry.time}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
+                                        '${inquiry.status} - ${inquiry.date}, ${inquiry.time}',
+                                        style: Theme.of(context).textTheme.bodySmall,
                                       ),
                                       SizedBox(height: screenHeight * 0.01),
                                       Text(
                                         inquiry.title,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium,
+                                        style: Theme.of(context).textTheme.bodyMedium,
                                       ),
                                     ],
                                   ),
@@ -171,13 +155,7 @@ class SubmittedInquiriesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _buildNavButton('Inquiries', 'inquiries.png', () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const SubmittedInquiriesScreen(),
-                        ),
-                      );
+                      
                     }),
                     _buildNavButton('Home', 'home-page.png', () {
                       Navigator.popUntil(context, (route) => route.isFirst);

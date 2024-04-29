@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/map_screen.dart';
 import 'package:mqpal/screens/submitted_inquiries.dart';
+import 'package:mqpal/screens/update_inquiry_screen.dart';
+import 'package:mqpal/state.dart';
 import 'package:mqpal/widgets/inquiry.dart';
+import 'package:provider/provider.dart';
 
 class InquiryDetailsScreen extends StatelessWidget {
   final Inquiry inquiry;
@@ -10,6 +13,68 @@ class InquiryDetailsScreen extends StatelessWidget {
     super.key,
     required this.inquiry,
   });
+
+  void _cancelInquiry(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.onBackground,
+        title: Text(
+          'Confirmation',
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
+        content: const Text('Are you sure you want to cancel the inquiry?'),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            child: Text(
+              'No',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              final updatedInquiry = Inquiry(
+                title: inquiry.title,
+                description: inquiry.description,
+                date: inquiry.date,
+                time: inquiry.time,
+                status: 'Cancelled',
+              );
+
+              Provider.of<StateModel>(context, listen: false)
+                  .updateInquiry(inquiry, updatedInquiry);
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Inquiry cancelled successfully')),
+              );
+
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            child: Text(
+              'Yes',
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +88,7 @@ class InquiryDetailsScreen extends StatelessWidget {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Theme.of(context).colorScheme.error,
+              color: Theme.of(context).colorScheme.onPrimary,
               size: 45,
             ),
             onPressed: () {
@@ -46,7 +111,6 @@ class InquiryDetailsScreen extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Inquiry details
             Positioned(
               left: 23,
               right: 23,
@@ -123,7 +187,7 @@ class InquiryDetailsScreen extends StatelessWidget {
                               ),
                               SizedBox(height: screenHeight * 0.01),
                               Text(
-                                'Status: In progress',
+                                'Status: ${inquiry.status}',
                                 style: Theme.of(context).textTheme.displaySmall,
                               ),
                               SizedBox(height: screenHeight * 0.02),
@@ -134,10 +198,36 @@ class InquiryDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.03),
+                  if (inquiry.status != 'Cancelled') 
+                    GestureDetector(
+                      onTap: () => _cancelInquiry(context),
+                      child: Container(
+                        width: screenWidth * 0.9,
+                        height: screenHeight * 0.06,
+                        decoration: ShapeDecoration(
+                          color: Theme.of(context).colorScheme.secondary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Cancel Inquiry',
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                        ),
+                      ),
+                    ),
+                  SizedBox(height: screenHeight * 0.01),
+                  if (inquiry.status != 'Cancelled') 
                   GestureDetector(
-                    onTap: () {
-                      // implement cancel inquiry
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            UpdateInquiryScreen(inquiry: inquiry),
+                      ),
+                    ),
                     child: Container(
                       width: screenWidth * 0.9,
                       height: screenHeight * 0.06,
@@ -149,16 +239,15 @@ class InquiryDetailsScreen extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          'Cancel Inquiry',
+                          'Update Inquiry',
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
-
             Positioned(
               left: 0,
               bottom: 0,

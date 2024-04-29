@@ -68,4 +68,13 @@ class StateModel with ChangeNotifier {
     await FirebaseStorageService.uploadInquiriesToStorage(_inquiries);
     notifyListeners();
   }
+  
+  void updateInquiry(Inquiry oldInquiry, Inquiry newInquiry) {
+    final index = _inquiries.indexOf(oldInquiry);
+    if (index != -1) {
+      _inquiries[index] = newInquiry;
+      FirebaseStorageService.uploadInquiriesToStorage(_inquiries);
+      notifyListeners();
+    }
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
 import 'package:mqpal/screens/map_screen.dart';
 import 'package:mqpal/screens/submitted_inquiries.dart';
+import 'package:mqpal/screens/update_inquiry_screen.dart';
 import 'package:mqpal/state.dart';
 import 'package:mqpal/widgets/inquiry.dart';
 import 'package:provider/provider.dart';
@@ -109,9 +110,35 @@ class InquirySuccessScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Inquiry Details',
-                      style: Theme.of(context).textTheme.displayMedium,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Inquiry Details',
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.only(left: screenWidth * 0.22),
+                          child: Positioned(
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.edit,
+                                size: 40,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        UpdateInquiryScreen(inquiry: inquiry),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   Container(
@@ -250,6 +277,9 @@ class InquirySuccessScreen extends StatelessWidget {
               }),
               _buildNavButton('Home', 'home-page.png', () {
                 Navigator.popUntil(context, (route) => route.isFirst);
+                Provider.of<StateModel>(context, listen: false)
+                      .toggleInquiryForm();
+
               }),
               _buildNavButton('Map', 'map.png', () {
                 Navigator.push(
