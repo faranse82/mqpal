@@ -149,9 +149,35 @@ class InquiryDetailsScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Title: ${inquiry.title}',
-                                style: Theme.of(context).textTheme.displaySmall,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Title: ${inquiry.title}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                  if (inquiry.status != 'Cancelled')
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.edit,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        size: 30,
+                                      ),
+                                      onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              UpdateInquiryScreen(
+                                                  inquiry: inquiry),
+                                        ),
+                                      ),
+                                    ),
+                                ],
                               ),
                               SizedBox(height: screenHeight * 0.01),
                               Text(
@@ -191,69 +217,37 @@ class InquiryDetailsScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.displaySmall,
                               ),
                               SizedBox(height: screenHeight * 0.02),
-                              if (inquiry.status != 'Cancelled')
-                                Padding(
-                                  padding: const EdgeInsets.all(16),
-                                  child: GestureDetector(
-                                    onTap: () => _cancelInquiry(context),
-                                    child: Container(
-                                      width: screenWidth * 0.5,
-                                      height: screenHeight * 0.06,
-                                      alignment: Alignment.center,
-                                      decoration: ShapeDecoration(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(3),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'Cancel Inquiry',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
                             ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.03),
-                  SizedBox(height: screenHeight * 0.01),
+                  SizedBox(height: screenHeight * 0.02),
                   if (inquiry.status != 'Cancelled')
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              UpdateInquiryScreen(inquiry: inquiry),
-                        ),
-                      ),
-                      child: Container(
-                        width: screenWidth * 0.9,
-                        height: screenHeight * 0.06,
-                        decoration: ShapeDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(3),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                      child: GestureDetector(
+                        onTap: () => _cancelInquiry(context),
+                        child: Container(
+                          width: screenWidth * 0.8,
+                          height: screenHeight * 0.06,
+                          decoration: ShapeDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(3),
+                            ),
                           ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Update Inquiry',
-                            style: Theme.of(context).textTheme.labelLarge,
+                          child: Center(
+                            child: Text(
+                              'Cancel Inquiry',
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                 ],
               ),
             ),
