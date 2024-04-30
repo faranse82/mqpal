@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mqpal/config.dart';
 import 'package:mqpal/firebase_cloud_storage.dart';
 import 'package:mqpal/widgets/inquiry.dart';
 
@@ -50,6 +51,7 @@ class StateModel with ChangeNotifier {
 
   void toggleDarkMode() {
     _isDarkMode = !_isDarkMode;
+    saveConfig();
     notifyListeners();
   }
 
@@ -64,9 +66,13 @@ class StateModel with ChangeNotifier {
   }
 
   Future<void> addInquiry(Inquiry inquiry) async {
-    _inquiries.add(inquiry);
-    await FirebaseStorageService.uploadInquiriesToStorage(_inquiries);
-    notifyListeners();
+    try {
+      _inquiries.add(inquiry);
+      await FirebaseStorageService.uploadInquiriesToStorage(_inquiries);
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to add inquiry: $e');
+    }
   }
 
   void updateInquiry(Inquiry oldInquiry, Inquiry newInquiry) {
@@ -93,5 +99,16 @@ class StateModel with ChangeNotifier {
         ),
       ),
     );
+  }
+
+  Future<void> loadConfig() async {
+    final config = await FirebaseStorageService.loadConfigFromStorage();
+    _isDarkMode = config.isDarkMode;
+    notifyListeners();
+  }
+
+  Future<void> saveConfig() async {
+    final config = Config(isDarkMode: _isDarkMode);
+    await FirebaseStorageService.uploadConfigToStorage(config);
   }
 }

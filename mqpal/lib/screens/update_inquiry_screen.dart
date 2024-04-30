@@ -106,6 +106,7 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenHeight * 0.09),
         child: AppBar(

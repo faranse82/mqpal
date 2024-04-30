@@ -56,7 +56,7 @@ class _NewInquiryState extends State<NewInquiry> {
     final DateTime now = DateTime.now();
     final String date = '${now.year}-${now.month}-${now.day}';
     final String time = '${now.hour}:${now.minute}';
-    final String status = 'In progress';
+    const String status = 'In progress';
 
     final Inquiry inquiry = Inquiry(
       title: title,

@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,7 @@ final lightTheme = ThemeData(
     primary: Color.fromARGB(255, 166, 25, 06),
     onPrimary: Color.fromARGB(255, 255, 255, 255),
     background: Colors.white,
-    onBackground: Colors.white,  
+    onBackground: Colors.white,
     secondary: Color.fromARGB(255, 166, 25, 06),
     surface: Color.fromRGBO(222, 226, 230, 100),
     onSurface: Color.fromARGB(255, 147, 147, 147),
@@ -158,10 +159,11 @@ final darkTheme = ThemeData(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
   final stateModel = StateModel();
   await stateModel.loadInquiries();
-
+  await stateModel.loadConfig();
   runApp(
     ChangeNotifierProvider(
       create: (_) => stateModel,
