@@ -163,26 +163,29 @@ void main() async {
   final stateModel = StateModel();
   await stateModel.loadInquiries();
   await stateModel.loadConfig();
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => stateModel,
-      child: const MainApp(),
-    ),
-  );
+  runApp(MainApp(stateModel: stateModel,));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final StateModel stateModel;
+  const MainApp({super.key, required this.stateModel});
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<StateModel>(
-      builder: (context, value, _) {
-        return MaterialApp(
-          title: 'MQPal',
-          theme: value.isDarkMode ? darkTheme : lightTheme,
-          home: const HomeScreen(),
-        );
-      },
+    WidgetsFlutterBinding.ensureInitialized();
+
+    
+    return ChangeNotifierProvider(
+      create: (_) => stateModel,
+      child: Consumer<StateModel>(
+        builder: (context, value, _) {
+          return MaterialApp(
+            title: 'MQPal',
+            theme: value.isDarkMode ? darkTheme : lightTheme,
+            home: const HomeScreen(),
+          );
+        },
+      ),
     );
   }
 }

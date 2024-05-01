@@ -213,9 +213,6 @@ class InquirySuccessScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16),
               child: GestureDetector(
                 onTap: () {
-                  Provider.of<StateModel>(context, listen: false)
-                      .addInquiry(inquiry);
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const HomeScreen()),
