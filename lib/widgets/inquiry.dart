@@ -50,7 +50,7 @@ class _NewInquiryState extends State<NewInquiry> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
-  void _submitInquiry() {
+  void submitInquiry() {
     final String title = _titleController.text;
     final String description = _descriptionController.text;
     final DateTime now = DateTime.now();
@@ -235,7 +235,7 @@ class _NewInquiryState extends State<NewInquiry> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: _submitInquiry,
+                    onPressed: submitInquiry,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       shape: RoundedRectangleBorder(
@@ -275,7 +275,7 @@ class _NewInquiryState extends State<NewInquiry> {
   Widget build(context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    return Expanded(
+    return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -289,44 +289,41 @@ class _NewInquiryState extends State<NewInquiry> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    style: Theme.of(context).textTheme.displayMedium,
-                    'Inquiry Form',
+                  Expanded(
+                    child: Text(
+                      'Inquiry Form',
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: screenWidth * 0.35, top: screenHeight * 0.003),
-                    child: GestureDetector(
-                      onTap: () {
-                        Provider.of<StateModel>(context, listen: false)
-                            .toggleInquiryForm();
-                      },
-                      child: Container(
-                        width: screenWidth * 0.08,
-                        height: screenHeight * 0.04,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/close.png'),
-                            fit: BoxFit.fill,
-                          ),
+                  GestureDetector(
+                    onTap: () {
+                      Provider.of<StateModel>(context, listen: false)
+                          .toggleInquiryForm();
+                    },
+                    child: Container(
+                      width: screenWidth * 0.08,
+                      height: screenHeight * 0.04,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/close.png'),
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              Divider(
+              const Divider(
                 thickness: 3,
-                color: Theme.of(context).colorScheme.secondary,
               ),
               buildAboutBox(),
-              SizedBox(height: screenHeight * 0.01),
+              const SizedBox(height: 8.0),
               buildTextFieldWithLabel('Title', _titleController),
-              SizedBox(height: screenHeight * 0.01),
+              const SizedBox(height: 8.0),
               buildDescriptionField(screenHeight),
-              SizedBox(height: screenHeight * 0.01),
+              const SizedBox(height: 16.0),
               buildSubmitButton(screenWidth, screenHeight),
-              SizedBox(height: screenHeight * 0.01),
+              const SizedBox(height: 8.0),
             ],
           ),
         ),

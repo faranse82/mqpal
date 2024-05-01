@@ -41,16 +41,19 @@ class SubmittedInquiriesScreen extends StatelessWidget {
           toolbarHeight: screenHeight * 0.09,
         ),
       ),
-      body: Container(
-        width: screenWidth,
-        height: screenHeight,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
-        ),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Container(
+          width: screenWidth,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.background,
+          ),
           child: Padding(
-            padding:
-                EdgeInsets.only(top: screenHeight * 0.015, left: 23, right: 23),
+            padding: EdgeInsets.only(
+              top: screenHeight * 0.015,
+              left: 23,
+              right: 23,
+              bottom: screenHeight * 0.1,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -67,50 +70,45 @@ class SubmittedInquiriesScreen extends StatelessWidget {
                 ),
                 SizedBox(height: screenHeight * 0.02),
                 _buildInquiriesList(context, completedInquiries),
-                SizedBox(height: screenHeight * 0.1),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: Positioned(
-        left: 0,
-        bottom: 0,
-        child: Container(
-          width: screenWidth,
-          height: screenHeight * 0.087,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            border: Border.all(
-              color: Colors.black.withOpacity(0.25),
-              width: 1,
+      bottomNavigationBar: Container(
+        width: screenWidth,
+        height: screenHeight * 0.087,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          border: Border.all(
+            color: Colors.black.withOpacity(0.25),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.primary,
+              blurRadius: 6,
+              offset: const Offset(0, -1),
+              spreadRadius: 0,
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).colorScheme.primary,
-                blurRadius: 6,
-                offset: const Offset(0, -1),
-                spreadRadius: 0,
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildNavButton('Inquiries', 'inquiries.png', () {}),
-              _buildNavButton('Home', 'home-page.png', () {
-                Navigator.popUntil(context, (route) => route.isFirst);
-              }),
-              _buildNavButton('Map', 'map.png', () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MapScreen(),
-                  ),
-                );
-              }),
-            ],
-          ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildNavButton('Inquiries', 'inquiries.png', () {}),
+            _buildNavButton('Home', 'home-page.png', () {
+              Navigator.popUntil(context, (route) => route.isFirst);
+            }),
+            _buildNavButton('Map', 'map.png', () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MapScreen(),
+                ),
+              );
+            }),
+          ],
         ),
       ),
     );
@@ -195,29 +193,31 @@ class SubmittedInquiriesScreen extends StatelessWidget {
   Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 55,
-            height: 45,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/$iconUrl'),
-                fit: BoxFit.contain,
+      child: Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 55,
+              height: 45,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/$iconUrl'),
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontFamily: 'Ubuntu',
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: 'Ubuntu',
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
