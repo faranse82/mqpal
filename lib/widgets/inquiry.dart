@@ -65,7 +65,7 @@ class _NewInquiryState extends State<NewInquiry> {
       time: time,
       status: status,
     );
-
+    Provider.of<StateModel>(context, listen: false).addInquiry(inquiry);
     Provider.of<StateModel>(context, listen: false).toggleInquiryForm();
 
     Navigator.push(

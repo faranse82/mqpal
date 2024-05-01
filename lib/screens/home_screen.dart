@@ -125,8 +125,12 @@ class HomeScreen extends StatelessWidget {
                             height: screenHeight * 0.15,
                             child: GestureDetector(
                               onTap: () {
-                                Provider.of<StateModel>(context, listen: false)
-                                    .toggleMap();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MapScreen(),
+                                  ),
+                                );
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -354,35 +358,6 @@ class HomeScreen extends StatelessWidget {
                 );
               },
             ),
-            Consumer<StateModel>(builder: (context, mapProvider, _) {
-              return Visibility(
-                visible: mapProvider.isMapOpen,
-                child: Positioned.fill(
-                  child: Container(
-                    color: Colors.black.withOpacity(0.6),
-                    child: Center(
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          double containerWidth = screenWidth * 0.95;
-                          double containerHeight = screenHeight * 0.424;
-                          return Container(
-                            width: containerWidth,
-                            height: containerHeight,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const SingleChildScrollView(
-                              child: Map(),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            }),
           ],
         ),
       ),
@@ -392,28 +367,33 @@ class HomeScreen extends StatelessWidget {
   Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: 55,
-            height: 45,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/$iconUrl'),
-                fit: BoxFit.contain,
+          Expanded(
+            child: Container(
+              width: 55,
+              height: 45,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/$iconUrl'),
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
           const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontFamily: 'Ubuntu',
+          Expanded(
+            child: Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: 'Ubuntu',
+              ),
             ),
-          ),
+          )
         ],
       ),
     );
