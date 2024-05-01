@@ -128,176 +128,178 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
           toolbarHeight: screenHeight * 0.09,
         ),
       ),
-      body: Container(
-        width: screenWidth,
-        height: screenHeight,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: screenWidth,
-              height: screenHeight * 0.563,
-              margin: EdgeInsets.all(screenWidth * 0.05),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.2),
-                  width: 1,
+      body: SingleChildScrollView(
+        child: Container(
+          width: screenWidth,
+          height: screenHeight,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.background,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: screenWidth,
+                margin: EdgeInsets.all(screenWidth * 0.05),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.2),
+                    width: 1,
+                  ),
                 ),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    width: screenWidth,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          width: 3,
-                          strokeAlign: BorderSide.strokeAlignCenter,
-                          color: Theme.of(context).colorScheme.secondary,
+                child: Column(
+                  children: [
+                    Container(
+                      width: screenWidth,
+                      decoration: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            width: 3,
+                            strokeAlign: BorderSide.strokeAlignCenter,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Title',
-                          style: Theme.of(context).textTheme.displaySmall,
-                        ),
-                        SizedBox(height: screenHeight * 0.01),
-                        Container(
-                          width: screenWidth * 0.8,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                width: 1,
-                                color: Theme.of(context).colorScheme.onSurface,
+                    SizedBox(height: screenHeight * 0.02),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Title',
+                            style: Theme.of(context).textTheme.displaySmall,
+                          ),
+                          SizedBox(height: screenHeight * 0.01),
+                          Container(
+                            width: screenWidth * 0.8,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 10),
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  width: 1,
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                                borderRadius: BorderRadius.circular(5),
                               ),
-                              borderRadius: BorderRadius.circular(5),
                             ),
-                          ),
-                          child: TextField(
-                            controller: _titleController,
-                            style: Theme.of(context).textTheme.bodySmall,
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: screenHeight * 0.02),
-                        Text(
-                          'Description',
-                          style: Theme.of(context).textTheme.displaySmall,
-                        ),
-                        SizedBox(height: screenHeight * 0.009),
-                        Container(
-                          width: screenWidth * 0.8,
-                          height: screenHeight * 0.35,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 10),
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                width: 1,
-                                color: Theme.of(context).colorScheme.onSurface,
+                            child: TextField(
+                              controller: _titleController,
+                              style: Theme.of(context).textTheme.bodySmall,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
                               ),
-                              borderRadius: BorderRadius.circular(5),
                             ),
                           ),
-                          child: TextField(
-                            controller: _descriptionController,
-                            maxLines: null,
-                            style: Theme.of(context).textTheme.bodySmall,
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
+                          SizedBox(height: screenHeight * 0.02),
+                          Text(
+                            'Description',
+                            style: Theme.of(context).textTheme.displaySmall,
+                          ),
+                          SizedBox(height: screenHeight * 0.009),
+                          Container(
+                            width: screenWidth * 0.8,
+                            height: screenHeight * 0.35,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 10),
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  width: 1,
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
+                                ),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            child: TextField(
+                              controller: _descriptionController,
+                              maxLines: null,
+                              style: Theme.of(context).textTheme.bodySmall,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: screenHeight * 0.02),
+                  ],
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.02),
+              GestureDetector(
+                onTap: _updateInquiry,
+                child: Container(
+                  width: screenWidth * 0.9,
+                  height: screenHeight * 0.06,
+                  decoration: ShapeDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(3),
                     ),
                   ),
-                ],
-              ),
-            ),
-            GestureDetector(
-              onTap: _updateInquiry,
-              child: Container(
-                width: screenWidth * 0.9,
-                height: screenHeight * 0.06,
-                decoration: ShapeDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(3)),
-                ),
-                child: Center(
-                  child: Text(
-                    'Update',
-                    style: Theme.of(context).textTheme.labelLarge,
+                  child: Center(
+                    child: Text(
+                      'Update',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: screenHeight * 0.12606),
-          ],
+              SizedBox(height: screenHeight * 0.02),
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: Positioned(
-        left: 0,
-        bottom: 0,
-        child: Container(
-          width: screenWidth,
-          height: screenHeight * 0.087,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            border: Border.all(
-              color: Colors.black.withOpacity(0.25),
-              width: 1,
+      bottomNavigationBar: Container(
+        width: screenWidth,
+        height: screenHeight * 0.087,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          border: Border.all(
+            color: Colors.black.withOpacity(0.25),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.primary,
+              blurRadius: 6,
+              offset: const Offset(0, -1),
+              spreadRadius: 0,
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).colorScheme.primary,
-                blurRadius: 6,
-                offset: const Offset(0, -1),
-                spreadRadius: 0,
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildNavButton('Inquiries', 'inquiries.png', () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SubmittedInquiriesScreen(),
-                  ),
-                );
-              }),
-              _buildNavButton('Home', 'home-page.png', () {
-                Navigator.popUntil(context, (route) => route.isFirst);
-              }),
-              _buildNavButton('Map', 'map.png', () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MapScreen(),
-                  ),
-                );
-              }),
-            ],
-          ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildNavButton('Inquiries', 'inquiries.png', () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SubmittedInquiriesScreen(),
+                ),
+              );
+            }),
+            _buildNavButton('Home', 'home-page.png', () {
+              Navigator.popUntil(context, (route) => route.isFirst);
+            }),
+            _buildNavButton('Map', 'map.png', () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MapScreen(),
+                ),
+              );
+            }),
+          ],
         ),
       ),
     );
@@ -309,13 +311,15 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: 55,
-            height: 45,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/$iconUrl'),
-                fit: BoxFit.contain,
+          Expanded(
+            child: Container(
+              width: 55,
+              height: 45,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/$iconUrl'),
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),

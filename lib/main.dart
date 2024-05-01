@@ -163,7 +163,9 @@ void main() async {
   final stateModel = StateModel();
   await stateModel.loadInquiries();
   await stateModel.loadConfig();
-  runApp(MainApp(stateModel: stateModel,));
+  runApp(MainApp(
+    stateModel: stateModel,
+  ));
 }
 
 class MainApp extends StatelessWidget {
@@ -174,9 +176,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
 
-    
-    return ChangeNotifierProvider(
-      create: (_) => stateModel,
+    return ChangeNotifierProvider.value(
+      value: stateModel,
       child: Consumer<StateModel>(
         builder: (context, value, _) {
           return MaterialApp(
