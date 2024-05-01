@@ -4,7 +4,6 @@ import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/widgets/inquiry.dart';
-import 'package:mqpal/widgets/map.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
