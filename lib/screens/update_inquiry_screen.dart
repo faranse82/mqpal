@@ -143,7 +143,7 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                 margin: EdgeInsets.all(screenWidth * 0.05),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                     color: Colors.black.withOpacity(0.2),
                     width: 1,
@@ -151,18 +151,6 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                 ),
                 child: Column(
                   children: [
-                    Container(
-                      width: screenWidth,
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            width: 3,
-                            strokeAlign: BorderSide.strokeAlignCenter,
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                        ),
-                      ),
-                    ),
                     SizedBox(height: screenHeight * 0.02),
                     Padding(
                       padding:
@@ -177,8 +165,9 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                           SizedBox(height: screenHeight * 0.01),
                           Container(
                             width: screenWidth * 0.8,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 10),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth * 0.016,
+                                vertical: screenHeight * 0.010),
                             decoration: ShapeDecoration(
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
@@ -206,8 +195,9 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                           Container(
                             width: screenWidth * 0.8,
                             height: screenHeight * 0.35,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 10),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth * 0.016,
+                                vertical: screenHeight * 0.010),
                             decoration: ShapeDecoration(
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
@@ -231,10 +221,34 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.02),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: screenWidth * 0.004,
+                          right: screenWidth * 0.004,
+                        ),
+                        child: Container(
+                          width: screenWidth * 0.9,
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                bottomRight:
+                                    Radius.circular(screenWidth * 0.02),
+                                bottomLeft: Radius.circular(screenWidth * 0.02),
+                              ),
+                              side: BorderSide(
+                                width: 2,
+                                strokeAlign: BorderSide.strokeAlignCenter,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              SizedBox(height: screenHeight * 0.02),
               GestureDetector(
                 onTap: _updateInquiry,
                 child: Container(
@@ -287,10 +301,10 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                   builder: (context) => const SubmittedInquiriesScreen(),
                 ),
               );
-            }),
+            }, screenHeight, screenWidth),
             _buildNavButton('Home', 'home-page.png', () {
               Navigator.popUntil(context, (route) => route.isFirst);
-            }),
+            }, screenHeight, screenWidth),
             _buildNavButton('Map', 'map.png', () {
               Navigator.push(
                 context,
@@ -298,41 +312,46 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                   builder: (context) => const MapScreen(),
                 ),
               );
-            }),
+            }, screenHeight, screenWidth),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Container(
-              width: 55,
-              height: 45,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/$iconUrl'),
-                  fit: BoxFit.contain,
+  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
+      double screenHeight, double screenWidth) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: screenHeight * 0.01),
+            Expanded(
+              child: Container(
+                width: 45,
+                height: 35,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/$iconUrl'),
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontFamily: 'Ubuntu',
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Ubuntu',
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

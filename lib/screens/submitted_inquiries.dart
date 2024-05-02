@@ -50,8 +50,8 @@ class SubmittedInquiriesScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(
               top: screenHeight * 0.015,
-              left: 23,
-              right: 23,
+              left: screenWidth * 0.05,
+              right: screenWidth * 0.05,
               bottom: screenHeight * 0.1,
             ),
             child: Column(
@@ -96,10 +96,11 @@ class SubmittedInquiriesScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildNavButton('Inquiries', 'inquiries.png', () {}),
+            _buildNavButton(
+                'Inquiries', 'inquiries.png', () {}, screenHeight, screenWidth),
             _buildNavButton('Home', 'home-page.png', () {
               Navigator.popUntil(context, (route) => route.isFirst);
-            }),
+            }, screenHeight, screenWidth),
             _buildNavButton('Map', 'map.png', () {
               Navigator.push(
                 context,
@@ -107,7 +108,7 @@ class SubmittedInquiriesScreen extends StatelessWidget {
                   builder: (context) => const MapScreen(),
                 ),
               );
-            }),
+            }, screenHeight, screenWidth),
           ],
         ),
       ),
@@ -130,7 +131,7 @@ class SubmittedInquiriesScreen extends StatelessWidget {
       ),
       child: inquiries.isEmpty
           ? Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all((screenHeight + screenWidth) * 0.011),
               child: Text(
                 'No inquiries found',
                 style: Theme.of(context).textTheme.bodyMedium,
@@ -154,8 +155,10 @@ class SubmittedInquiriesScreen extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    margin: const EdgeInsets.all(16),
-                    padding: const EdgeInsets.all(16),
+                    margin:
+                        EdgeInsets.all((screenHeight + screenWidth) * 0.011),
+                    padding:
+                        EdgeInsets.all((screenHeight + screenWidth) * 0.011),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.background,
                       borderRadius: BorderRadius.circular(8),
@@ -190,30 +193,35 @@ class SubmittedInquiriesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Expanded(
+  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
+      double screenHeight, double screenWidth) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 55,
-              height: 45,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/$iconUrl'),
-                  fit: BoxFit.contain,
+            SizedBox(height: screenHeight * 0.01),
+            Expanded(
+              child: Container(
+                width: 45,
+                height: 35,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/$iconUrl'),
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontFamily: 'Ubuntu',
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Ubuntu',
+                ),
               ),
             ),
           ],

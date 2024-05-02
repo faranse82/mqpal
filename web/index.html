@@ -33,6 +33,15 @@
   <link rel="manifest" href="manifest.json">
 
   <script>
+    if (platform.name.toLowerCase() == "chrome" && 
+    parseInt(platform.version.split(".")[0]) >= 15) {
+          window.flutterWebRenderer = "html";
+           } else { 
+             window.flutterWebRenderer = "canvaskit";
+           }
+</script>
+
+  <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
   </script>

@@ -51,6 +51,5 @@ flutter:
         - asset: assets/fonts/Ubuntu-MediumItalic.ttf
   assets:
     - assets/fonts/
-    - assets/images/coffee.png
     - assets/images/
     - assets/images/mq-campus-map.png

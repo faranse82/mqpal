@@ -45,8 +45,10 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:
-                          EdgeInsets.only(top: screenHeight * 0.05, left: 12),
+                      padding: EdgeInsets.only(
+                        top: screenHeight * 0.05,
+                        left: screenWidth * 0.012,
+                      ),
                       child: Text('MQPal',
                           style: Theme.of(context).textTheme.titleLarge),
                     ),
@@ -55,7 +57,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: 23,
+              left: screenWidth * 0.026,
               top: screenHeight * 0.124,
               child: Text(
                 'Hi Faran!',
@@ -86,17 +88,19 @@ class HomeScreen extends StatelessWidget {
 
             // "Lost on campus?" section
             Positioned(
-              left: 23,
-              right: 23,
+              left: screenWidth * 0.05,
               top: screenHeight * 0.19,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 430,
+                    width: screenWidth * 0.9,
                     height: 0.2771 * screenHeight,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(screenWidth * 0.02),
+                        topRight: Radius.circular(screenWidth * 0.02),
+                      ),
                       color: Theme.of(context).colorScheme.surface, //widget
                       border: Border.all(
                         color: Colors.black.withOpacity(0.2),
@@ -106,10 +110,10 @@ class HomeScreen extends StatelessWidget {
                     child: Stack(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                            right: 16,
-                            top: 10,
+                          padding: EdgeInsets.only(
+                            left: screenWidth * 0.03,
+                            right: screenWidth * 0.016,
+                            top: screenHeight * 0.015,
                           ),
                           child: Text(
                             'Lost on campus?',
@@ -117,9 +121,9 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left: 16,
-                          right: 16,
-                          top: 70,
+                          left: screenWidth * 0.032,
+                          right: screenWidth * 0.032,
+                          top: screenHeight * 0.07,
                           child: SizedBox(
                             width: screenWidth * 0.8,
                             height: screenHeight * 0.15,
@@ -148,33 +152,39 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left: 16,
-                          right: 16,
+                          left: screenWidth * 0.026,
+                          right: screenWidth * 0.026,
                           top: screenHeight * 0.235,
                           child: Text(
                             'Click on the MQU logo to view the map!',
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 266,
-                          ),
-                          child: Container(
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  width: 2,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .secondary, //divider bar
-                                ),
-                              ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: screenWidth * 0.005,
+                        right: screenWidth * 0.005,
+                      ),
+                      child: Container(
+                        width: screenWidth * 0.89,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(screenWidth * 0.02),
+                              bottomLeft: Radius.circular(screenWidth * 0.02),
+                            ),
+                            side: BorderSide(
+                              width: 2,
+                              strokeAlign: BorderSide.strokeAlignCenter,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
@@ -183,9 +193,8 @@ class HomeScreen extends StatelessWidget {
 
             // "Inquiries" section
             Positioned(
-              left: 23,
-              right: 23,
-              top: screenHeight * 0.48,
+              left: screenWidth * 0.05,
+              top: screenHeight * 0.49,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -193,8 +202,11 @@ class HomeScreen extends StatelessWidget {
                     width: screenWidth * 0.9,
                     height: screenHeight * 0.3283,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
                       color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(screenWidth * 0.02),
+                        topRight: Radius.circular(screenWidth * 0.02),
+                      ),
                       border: Border.all(
                         color: Colors.black.withOpacity(0.2),
                         width: 1,
@@ -203,10 +215,10 @@ class HomeScreen extends StatelessWidget {
                     child: Stack(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                            right: 16,
-                            top: 10,
+                          padding: EdgeInsets.only(
+                            left: screenWidth * 0.03,
+                            right: screenWidth * 0.016,
+                            top: screenHeight * 0.015,
                           ),
                           child: Text(
                             'Inquiries',
@@ -214,13 +226,13 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                            right: 16,
-                            top: 70,
+                          padding: EdgeInsets.only(
+                            left: screenWidth * 0.03,
+                            right: screenWidth * 0.016,
+                            top: screenHeight * 0.07,
                           ),
                           child: Text(
-                            'Have a question about your studies?\nSubmit and inquiry and we will help you out!',
+                            'Have a question about your studies? Submit and inquiry and we will help you out!',
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
@@ -252,80 +264,37 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: screenHeight * 0.324,
-                          ),
-                          child: Container(
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                side: BorderSide(
-                                  width: 2,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                ),
-                              ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: screenWidth * 0.005,
+                        right: screenWidth * 0.005,
+                      ),
+                      child: Container(
+                        width: screenWidth * 0.89,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(screenWidth * 0.02),
+                              bottomLeft: Radius.circular(screenWidth * 0.02),
+                            ),
+                            side: BorderSide(
+                              width: 2,
+                              strokeAlign: BorderSide.strokeAlignCenter,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
 
-            // Bottom navigation bar
-            Positioned(
-              left: 0,
-              bottom: 0,
-              child: Container(
-                width: screenWidth,
-                height: screenHeight * 0.087,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.25),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Theme.of(context).colorScheme.primary,
-                      blurRadius: 6,
-                      offset: const Offset(0, -1),
-                      spreadRadius: 0,
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildNavButton('Inquiries', 'inquiries.png', () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const SubmittedInquiriesScreen(),
-                        ),
-                      );
-                    }),
-                    _buildNavButton('Home', 'home-page.png', () {
-                      Navigator.popUntil(context, (route) => route.isFirst);
-                    }),
-                    _buildNavButton('Map', 'map.png', () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MapScreen(),
-                        ),
-                      );
-                    }),
-                  ],
-                ),
-              ),
-            ),
             Consumer<StateModel>(
               builder: (context, expandedProvider, _) {
                 return Visibility(
@@ -359,40 +328,85 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+      // Bottom navigation bar
+      bottomNavigationBar: Container(
+        width: screenWidth,
+        height: screenHeight * 0.087,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          border: Border.all(
+            color: Colors.black.withOpacity(0.25),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.primary,
+              blurRadius: 6,
+              offset: const Offset(0, -1),
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildNavButton('Inquiries', 'inquiries.png', () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SubmittedInquiriesScreen(),
+                ),
+              );
+            }, screenHeight, screenWidth),
+            _buildNavButton(
+                'Home', 'home-page.png', () {}, screenHeight, screenWidth),
+            _buildNavButton('Map', 'map.png', () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MapScreen(),
+                ),
+              );
+            }, screenHeight, screenWidth),
+          ],
+        ),
+      ),
     );
   }
 
-  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Container(
-              width: 55,
-              height: 45,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/$iconUrl'),
-                  fit: BoxFit.contain,
+  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
+      double screenHeight, double screenWidth) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: screenHeight * 0.01),
+            Expanded(
+              child: Container(
+                width: 45,
+                height: 35,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/$iconUrl'),
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Expanded(
-            child: Text(
-              label,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontFamily: 'Ubuntu',
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Ubuntu',
+                ),
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
