@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/submitted_inquiries.dart';
+import 'package:sizer/sizer.dart';
 
 class MapScreen extends StatelessWidget {
   const MapScreen({super.key});
@@ -87,11 +88,12 @@ class MapScreen extends StatelessWidget {
                   builder: (context) => const SubmittedInquiriesScreen(),
                 ),
               );
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
             _buildNavButton('Home', 'home-page.png', () {
               Navigator.popUntil(context, (route) => route.isFirst);
-            }, screenHeight, screenWidth),
-            _buildNavButton('Map', 'map.png', () {}, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
+            _buildNavButton(
+                'Map', 'map.png', () {}, screenHeight, screenWidth, context),
           ],
         ),
       ),
@@ -99,7 +101,7 @@ class MapScreen extends StatelessWidget {
   }
 
   Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
-      double screenHeight, double screenWidth) {
+      double screenHeight, double screenWidth, BuildContext context) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -109,8 +111,8 @@ class MapScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.01),
             Expanded(
               child: Container(
-                width: 45,
-                height: 35,
+                width: 40.w,
+                height: 30.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/$iconUrl'),
@@ -120,14 +122,8 @@ class MapScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontFamily: 'Ubuntu',
-                ),
-              ),
+              child:
+                  Text(label, style: Theme.of(context).textTheme.labelMedium),
             ),
           ],
         ),
