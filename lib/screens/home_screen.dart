@@ -4,6 +4,7 @@ import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/widgets/inquiry.dart';
+import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
         width: screenWidth,
@@ -25,7 +27,7 @@ class HomeScreen extends StatelessWidget {
             Positioned(
               child: Container(
                 width: screenWidth,
-                height: 0.12 * screenHeight,
+                height: 12.h,
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primary, //top nav
                   border: Border.all(
@@ -46,8 +48,8 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                        top: screenHeight * 0.05,
-                        left: screenWidth * 0.012,
+                        top: 5.h,
+                        left: 1.2.w,
                       ),
                       child: Text('MQPal',
                           style: Theme.of(context).textTheme.titleLarge),
@@ -57,25 +59,24 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: screenWidth * 0.026,
-              top: screenHeight * 0.124,
+              left: 2.6.w,
+              top: 12.4.h,
               child: Text(
-                'Hi Faran!',
+                'Hi!',
                 style: Theme.of(context).textTheme.displayLarge,
               ),
             ),
 
             Padding(
-              padding: EdgeInsets.only(
-                  top: screenHeight * 0.056, left: screenWidth * 0.85),
+              padding: EdgeInsets.only(top: 5.6.h, left: 86.w),
               child: GestureDetector(
                 onTap: () {
                   Provider.of<StateModel>(context, listen: false)
                       .toggleDarkMode();
                 },
                 child: Container(
-                  width: 55,
-                  height: 55,
+                  width: 30.sp,
+                  height: 30.sp,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/images/toggleDark.png'),
@@ -94,12 +95,12 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: screenWidth * 0.9,
-                    height: 0.2771 * screenHeight,
+                    width: 90.w,
+                    height: 27.71.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(screenWidth * 0.02),
-                        topRight: Radius.circular(screenWidth * 0.02),
+                        topLeft: Radius.circular(2.w),
+                        topRight: Radius.circular(2.w),
                       ),
                       color: Theme.of(context).colorScheme.surface, //widget
                       border: Border.all(
@@ -111,9 +112,9 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                            left: screenWidth * 0.03,
-                            right: screenWidth * 0.016,
-                            top: screenHeight * 0.015,
+                            left: 3.w,
+                            right: 1.6.w,
+                            top: 1.5.h,
                           ),
                           child: Text(
                             'Lost on campus?',
@@ -121,12 +122,12 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left: screenWidth * 0.032,
-                          right: screenWidth * 0.032,
-                          top: screenHeight * 0.07,
+                          left: 3.2.w,
+                          right: 3.2.w,
+                          top: 7.h,
                           child: SizedBox(
-                            width: screenWidth * 0.8,
-                            height: screenHeight * 0.15,
+                            width: 80.w,
+                            height: 15.h,
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -152,9 +153,9 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left: screenWidth * 0.026,
-                          right: screenWidth * 0.026,
-                          top: screenHeight * 0.235,
+                          left: 2.6.w,
+                          right: 2.6.w,
+                          top: 23.5.h,
                           child: Text(
                             'Click on the MQU logo to view the map!',
                             style: Theme.of(context).textTheme.displaySmall,
@@ -166,16 +167,16 @@ class HomeScreen extends StatelessWidget {
                   Center(
                     child: Padding(
                       padding: EdgeInsets.only(
-                        left: screenWidth * 0.005,
-                        right: screenWidth * 0.005,
+                        left: 0.5.w,
+                        right: 0.5.w,
                       ),
                       child: Container(
-                        width: screenWidth * 0.89,
+                        width: 89.w,
                         decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(screenWidth * 0.02),
-                              bottomLeft: Radius.circular(screenWidth * 0.02),
+                              bottomRight: Radius.circular(2.w),
+                              bottomLeft: Radius.circular(2.w),
                             ),
                             side: BorderSide(
                               width: 2,
@@ -193,19 +194,19 @@ class HomeScreen extends StatelessWidget {
 
             // "Inquiries" section
             Positioned(
-              left: screenWidth * 0.05,
-              top: screenHeight * 0.49,
+              left: 5.w,
+              top: 49.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: screenWidth * 0.9,
-                    height: screenHeight * 0.3283,
+                    width: 90.w,
+                    height: 32.83.h,
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(screenWidth * 0.02),
-                        topRight: Radius.circular(screenWidth * 0.02),
+                        topLeft: Radius.circular(2.w),
+                        topRight: Radius.circular(2.w),
                       ),
                       border: Border.all(
                         color: Colors.black.withOpacity(0.2),
@@ -216,9 +217,9 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                            left: screenWidth * 0.03,
-                            right: screenWidth * 0.016,
-                            top: screenHeight * 0.015,
+                            left: 3.w,
+                            right: 7.w,
+                            top: 2.h,
                           ),
                           child: Text(
                             'Inquiries',
@@ -227,9 +228,9 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                            left: screenWidth * 0.03,
-                            right: screenWidth * 0.016,
-                            top: screenHeight * 0.07,
+                            left: 3.w,
+                            right: 1.6.w,
+                            top: 7.h,
                           ),
                           child: Text(
                             'Have a question about your studies? Submit and inquiry and we will help you out!',
@@ -238,21 +239,22 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                            left: screenWidth * 0.30,
-                            right: screenWidth * 0.30,
-                            top: screenHeight * 0.24,
+                            left: 30.w,
+                            right: 30.w,
+                            top: 24.h,
                           ),
                           child: GestureDetector(
+                            key: const Key('inquiry-form'),
                             onTap: () {
                               Provider.of<StateModel>(context, listen: false)
                                   .toggleInquiryForm();
                             },
                             child: Container(
-                              width: screenWidth * 0.5,
-                              height: screenHeight * 0.05,
+                              width: 50.w,
+                              height: 5.h,
                               decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.secondary,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(4.sp),
                               ),
                               child: Center(
                                 child: Text(
@@ -270,16 +272,16 @@ class HomeScreen extends StatelessWidget {
                   Center(
                     child: Padding(
                       padding: EdgeInsets.only(
-                        left: screenWidth * 0.005,
-                        right: screenWidth * 0.005,
+                        left: 0.5.w,
+                        right: 0.5.w,
                       ),
                       child: Container(
-                        width: screenWidth * 0.89,
+                        width: 89.w,
                         decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(screenWidth * 0.02),
-                              bottomLeft: Radius.circular(screenWidth * 0.02),
+                              bottomRight: Radius.circular(2.w),
+                              bottomLeft: Radius.circular(2.w),
                             ),
                             side: BorderSide(
                               width: 2,
@@ -305,8 +307,8 @@ class HomeScreen extends StatelessWidget {
                       child: Center(
                         child: LayoutBuilder(
                           builder: (context, constraints) {
-                            double containerWidth = screenWidth * 0.93;
-                            double containerHeight = screenHeight * 0.741;
+                            double containerWidth = 93.w;
+                            double containerHeight = 74.1.h;
 
                             return Container(
                               width: containerWidth,
@@ -331,7 +333,7 @@ class HomeScreen extends StatelessWidget {
       // Bottom navigation bar
       bottomNavigationBar: Container(
         width: screenWidth,
-        height: screenHeight * 0.087,
+        height: 8.7.h,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
           border: Border.all(
@@ -341,7 +343,7 @@ class HomeScreen extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Theme.of(context).colorScheme.primary,
-              blurRadius: 6,
+              blurRadius: 6.sp,
               offset: const Offset(0, -1),
               spreadRadius: 0,
             ),
@@ -357,9 +359,9 @@ class HomeScreen extends StatelessWidget {
                   builder: (context) => const SubmittedInquiriesScreen(),
                 ),
               );
-            }, screenHeight, screenWidth),
-            _buildNavButton(
-                'Home', 'home-page.png', () {}, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
+            _buildNavButton('Home', 'home-page.png', () {}, screenHeight,
+                screenWidth, context),
             _buildNavButton('Map', 'map.png', () {
               Navigator.push(
                 context,
@@ -367,7 +369,7 @@ class HomeScreen extends StatelessWidget {
                   builder: (context) => const MapScreen(),
                 ),
               );
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
           ],
         ),
       ),
@@ -375,7 +377,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
-      double screenHeight, double screenWidth) {
+      double screenHeight, double screenWidth, BuildContext context) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -385,8 +387,8 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.01),
             Expanded(
               child: Container(
-                width: 45,
-                height: 35,
+                width: 40.w,
+                height: 30.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/$iconUrl'),
@@ -396,14 +398,8 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontFamily: 'Ubuntu',
-                ),
-              ),
+              child:
+                  Text(label, style: Theme.of(context).textTheme.labelMedium),
             ),
           ],
         ),

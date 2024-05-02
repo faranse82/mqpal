@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mqpal/firebase_options.dart';
 import 'package:mqpal/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/state.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sizer/sizer.dart';
 
 final lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
@@ -17,64 +19,64 @@ final lightTheme = ThemeData(
     error: Colors.white,
   ),
   fontFamily: 'Ubuntu',
-  textTheme: const TextTheme(
+  textTheme: TextTheme(
     displayLarge: TextStyle(
       color: Colors.black,
-      fontSize: 50,
+      fontSize: 26.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     displayMedium: TextStyle(
       color: Colors.black,
-      fontSize: 36,
+      fontSize: 20.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     displaySmall: TextStyle(
       color: Colors.black,
-      fontSize: 20,
+      fontSize: 12.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     bodyLarge: TextStyle(
       color: Colors.black,
-      fontSize: 30,
+      fontSize: 16.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     bodyMedium: TextStyle(
-      color: Color.fromARGB(255, 0, 0, 0),
-      fontSize: 26,
+      color: const Color.fromARGB(255, 0, 0, 0),
+      fontSize: 16.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     bodySmall: TextStyle(
-      color: Color.fromARGB(255, 0, 0, 0),
-      fontSize: 17,
+      color: const Color.fromARGB(255, 0, 0, 0),
+      fontSize: 12.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     labelMedium: TextStyle(
       color: Colors.white,
-      fontSize: 20,
+      fontSize: 12.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     labelLarge: TextStyle(
       color: Colors.white,
-      fontSize: 30,
+      fontSize: 16.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     labelSmall: TextStyle(
-      color: Color.fromARGB(255, 97, 95, 95),
-      fontSize: 12,
+      color: const Color.fromARGB(255, 97, 95, 95),
+      fontSize: 8.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     titleLarge: TextStyle(
       color: Colors.white,
-      fontSize: 50,
+      fontSize: 26.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
@@ -92,64 +94,64 @@ final darkTheme = ThemeData(
       onError: Color.fromARGB(255, 65, 65, 65),
       error: Color.fromARGB(255, 255, 255, 255)),
   fontFamily: 'Ubuntu',
-  textTheme: const TextTheme(
+  textTheme: TextTheme(
     titleLarge: TextStyle(
       color: Colors.white,
-      fontSize: 50,
+      fontSize: 26.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     displayLarge: TextStyle(
       color: Colors.white,
-      fontSize: 50,
+      fontSize: 26.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     displayMedium: TextStyle(
       color: Colors.white,
-      fontSize: 36,
+      fontSize: 20.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     displaySmall: TextStyle(
       color: Colors.white,
-      fontSize: 20,
+      fontSize: 12.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     bodyLarge: TextStyle(
       color: Colors.white,
-      fontSize: 30,
+      fontSize: 16.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     bodySmall: TextStyle(
       color: Colors.white,
-      fontSize: 17,
+      fontSize: 12.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     bodyMedium: TextStyle(
       color: Colors.white,
-      fontSize: 26,
+      fontSize: 16.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     labelMedium: TextStyle(
       color: Colors.white,
-      fontSize: 20,
+      fontSize: 12.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     labelLarge: TextStyle(
       color: Colors.white,
-      fontSize: 30,
+      fontSize: 16.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
     labelSmall: TextStyle(
-      color: Color.fromARGB(255, 128, 128, 128),
-      fontSize: 12,
+      color: const Color.fromARGB(255, 128, 128, 128),
+      fontSize: 8.sp,
       fontFamily: 'Ubuntu',
       fontWeight: FontWeight.w400,
     ),
@@ -159,7 +161,7 @@ final darkTheme = ThemeData(
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final stateModel = StateModel();
   await stateModel.loadInquiries();
   await stateModel.loadConfig();
@@ -175,18 +177,21 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
-
-    return ChangeNotifierProvider.value(
-      value: stateModel,
-      child: Consumer<StateModel>(
-        builder: (context, value, _) {
-          return MaterialApp(
-            title: 'MQPal',
-            theme: value.isDarkMode ? darkTheme : lightTheme,
-            home: const HomeScreen(),
-          );
-        },
-      ),
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return ChangeNotifierProvider.value(
+          value: stateModel,
+          child: Consumer<StateModel>(
+            builder: (context, value, _) {
+              return MaterialApp(
+                title: 'MQPal',
+                theme: value.isDarkMode ? darkTheme : lightTheme,
+                home: const HomeScreen(),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

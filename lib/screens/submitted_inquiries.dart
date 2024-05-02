@@ -4,6 +4,7 @@ import 'package:mqpal/screens/map_screen.dart';
 import 'package:mqpal/state.dart';
 import 'package:mqpal/widgets/inquiry.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class SubmittedInquiriesScreen extends StatelessWidget {
   const SubmittedInquiriesScreen({super.key});
@@ -96,11 +97,11 @@ class SubmittedInquiriesScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildNavButton(
-                'Inquiries', 'inquiries.png', () {}, screenHeight, screenWidth),
+            _buildNavButton('Inquiries', 'inquiries.png', () {}, screenHeight,
+                screenWidth, context),
             _buildNavButton('Home', 'home-page.png', () {
               Navigator.popUntil(context, (route) => route.isFirst);
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
             _buildNavButton('Map', 'map.png', () {
               Navigator.push(
                 context,
@@ -108,7 +109,7 @@ class SubmittedInquiriesScreen extends StatelessWidget {
                   builder: (context) => const MapScreen(),
                 ),
               );
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
           ],
         ),
       ),
@@ -194,7 +195,7 @@ class SubmittedInquiriesScreen extends StatelessWidget {
   }
 
   Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
-      double screenHeight, double screenWidth) {
+      double screenHeight, double screenWidth, BuildContext context) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -204,8 +205,8 @@ class SubmittedInquiriesScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.01),
             Expanded(
               child: Container(
-                width: 45,
-                height: 35,
+                width: 40.w,
+                height: 30.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/$iconUrl'),
@@ -215,14 +216,8 @@ class SubmittedInquiriesScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontFamily: 'Ubuntu',
-                ),
-              ),
+              child:
+                  Text(label, style: Theme.of(context).textTheme.labelMedium),
             ),
           ],
         ),

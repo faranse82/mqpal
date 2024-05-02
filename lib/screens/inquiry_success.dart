@@ -4,6 +4,7 @@ import 'package:mqpal/screens/map_screen.dart';
 import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/screens/update_inquiry_screen.dart';
 import 'package:mqpal/widgets/inquiry.dart';
+import 'package:sizer/sizer.dart';
 
 class InquirySuccessScreen extends StatelessWidget {
   final Inquiry inquiry;
@@ -18,7 +19,6 @@ class InquirySuccessScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenHeight * 0.09),
         child: AppBar(
@@ -40,250 +40,260 @@ class InquirySuccessScreen extends StatelessWidget {
           toolbarHeight: screenHeight * 0.09,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: screenWidth,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: screenHeight * 0.03),
-              Container(
-                width: screenWidth * 0.9,
-                padding: EdgeInsets.only(top: screenHeight * 0.015),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(screenWidth * 0.02),
-                    topRight: Radius.circular(screenWidth * 0.02),
-                  ),
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.2),
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      'Success!',
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    SizedBox(height: screenHeight * 0.01),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-                      child: Text(
-                        'Your inquiry has been successfully submitted. You will get an email from one of our staff within the next 1 - 3 business days.',
-                        textAlign: TextAlign.justify,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ),
-                    SizedBox(height: screenHeight * 0.02),
-                    Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: screenWidth * 0.005,
-                          right: screenWidth * 0.005,
-                        ),
-                        child: Container(
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                bottomRight:
-                                    Radius.circular(screenWidth * 0.02),
-                                bottomLeft: Radius.circular(screenWidth * 0.02),
-                              ),
-                              side: BorderSide(
-                                width: 2,
-                                strokeAlign: BorderSide.strokeAlignCenter,
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: screenHeight * 0.03),
-              Container(
-                width: screenWidth * 0.9,
-                decoration: ShapeDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  shape: RoundedRectangleBorder(
+      body: Scrollbar(
+        radius: Radius.circular(5.sp),
+        child: SingleChildScrollView(
+          child: Container(
+            width: screenWidth,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.background,
+            ),
+            child: Column(
+              children: [
+                SizedBox(height: 3.w),
+                Container(
+                  width: screenWidth * 0.9,
+                  padding: EdgeInsets.only(top: screenHeight * 0.015),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(screenWidth * 0.02),
                       topRight: Radius.circular(screenWidth * 0.02),
                     ),
-                    side: BorderSide(
-                      width: 1,
+                    border: Border.all(
                       color: Colors.black.withOpacity(0.2),
+                      width: 1,
                     ),
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(
-                          (screenHeight + screenWidth) / 2 * 0.022),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Inquiry Details',
-                            style: Theme.of(context).textTheme.displayMedium,
+                  child: Column(
+                    children: [
+                      Text(
+                        'Success!',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      SizedBox(height: screenHeight * 0.01),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.05),
+                        child: Text(
+                          'Your inquiry has been successfully submitted. You will get an email from one of our staff within the next 1 - 3 business days.',
+                          textAlign: TextAlign.justify,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: screenWidth * 0.005,
+                            right: screenWidth * 0.005,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: screenWidth * 0.22),
-                            child: Positioned(
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.edit,
-                                  size: 40,
+                          child: Container(
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  bottomRight:
+                                      Radius.circular(screenWidth * 0.02),
+                                  bottomLeft:
+                                      Radius.circular(screenWidth * 0.02),
+                                ),
+                                side: BorderSide(
+                                  width: 2,
+                                  strokeAlign: BorderSide.strokeAlignCenter,
                                   color:
                                       Theme.of(context).colorScheme.secondary,
                                 ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          UpdateInquiryScreen(inquiry: inquiry),
-                                    ),
-                                  );
-                                },
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: screenWidth * 0.9,
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          side: BorderSide(
-                            width: 2,
-                            strokeAlign: BorderSide.strokeAlignCenter,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .secondary
-                                .withOpacity(0.4),
                           ),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.03),
+                Container(
+                  width: screenWidth * 0.9,
+                  decoration: ShapeDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(screenWidth * 0.02),
+                        topRight: Radius.circular(screenWidth * 0.02),
+                      ),
+                      side: BorderSide(
+                        width: 1,
+                        color: Colors.black.withOpacity(0.2),
+                      ),
                     ),
-                    SizedBox(height: screenHeight * 0.02),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Title: ${inquiry.title}',
-                            style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(
+                            (screenHeight + screenWidth) / 2 * 0.022),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Inquiry Details',
+                              style: Theme.of(context).textTheme.displayMedium,
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(left: screenWidth * 0.22),
+                              child: Positioned(
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    size: 40,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            UpdateInquiryScreen(
+                                                inquiry: inquiry),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            side: BorderSide(
+                              width: 2,
+                              strokeAlign: BorderSide.strokeAlignCenter,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.4),
+                            ),
                           ),
-                          SizedBox(height: screenHeight * 0.02),
-                          Text(
-                            'Description',
-                            style: Theme.of(context).textTheme.displaySmall,
-                          ),
-                          SizedBox(height: screenHeight * 0.01),
-                          Container(
-                            height: screenHeight * 0.2,
-                            width: screenWidth * 0.9,
-                            padding: EdgeInsets.all(
-                                (screenHeight + screenWidth) / 2 * 0.01),
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                    width: 1,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface),
-                                borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.05),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Title: ${inquiry.title}',
+                              style: Theme.of(context).textTheme.displaySmall,
+                            ),
+                            SizedBox(height: screenHeight * 0.02),
+                            Text(
+                              'Description',
+                              style: Theme.of(context).textTheme.displaySmall,
+                            ),
+                            SizedBox(height: screenHeight * 0.01),
+                            Container(
+                              height: screenHeight * 0.2,
+                              width: screenWidth * 0.9,
+                              padding: EdgeInsets.all(
+                                  (screenHeight + screenWidth) / 2 * 0.01),
+                              decoration: ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      width: 1,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                              child: SingleChildScrollView(
+                                child: Text(
+                                  inquiry.description,
+                                  textAlign: TextAlign.justify,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
                               ),
                             ),
-                            child: SingleChildScrollView(
+                            SizedBox(height: screenHeight * 0.02),
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(bottom: screenHeight * 0.012),
                               child: Text(
-                                inquiry.description,
-                                textAlign: TextAlign.justify,
+                                'Date and time submitted: \n  - ${inquiry.time}, ${inquiry.date}',
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
-                            ),
-                          ),
-                          SizedBox(height: screenHeight * 0.02),
-                          Padding(
-                            padding:
-                                EdgeInsets.only(bottom: screenHeight * 0.012),
-                            child: Text(
-                              'Date and time submitted: \n  - ${inquiry.time}, ${inquiry.date}',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: screenWidth * 0.005,
-                          right: screenWidth * 0.005,
+                            )
+                          ],
                         ),
-                        child: Container(
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                bottomRight:
-                                    Radius.circular(screenWidth * 0.02),
-                                bottomLeft: Radius.circular(screenWidth * 0.02),
-                              ),
-                              side: BorderSide(
-                                width: 2,
-                                strokeAlign: BorderSide.strokeAlignCenter,
-                                color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: screenWidth * 0.005,
+                            right: screenWidth * 0.005,
+                          ),
+                          child: Container(
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  bottomRight:
+                                      Radius.circular(screenWidth * 0.02),
+                                  bottomLeft:
+                                      Radius.circular(screenWidth * 0.02),
+                                ),
+                                side: BorderSide(
+                                  width: 2,
+                                  strokeAlign: BorderSide.strokeAlignCenter,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: screenHeight * 0.016),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
-                  },
-                  child: Container(
-                    width: screenWidth * 0.9,
-                    height: screenHeight * 0.06,
-                    decoration: ShapeDecoration(
-                      color: Theme.of(context).colorScheme.secondary,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(3)),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Return Home',
-                        style: Theme.of(context).textTheme.labelLarge,
+                Padding(
+                  padding: EdgeInsets.only(top: screenHeight * 0.016),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()),
+                      );
+                    },
+                    child: Container(
+                      width: screenWidth * 0.9,
+                      height: screenHeight * 0.06,
+                      decoration: ShapeDecoration(
+                        color: Theme.of(context).colorScheme.secondary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(3)),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Return Home',
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: 3.h)
+              ],
+            ),
           ),
         ),
       ),
@@ -315,10 +325,10 @@ class InquirySuccessScreen extends StatelessWidget {
                   builder: (context) => const SubmittedInquiriesScreen(),
                 ),
               );
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
             _buildNavButton('Home', 'home-page.png', () {
               Navigator.popUntil(context, (route) => route.isFirst);
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
             _buildNavButton('Map', 'map.png', () {
               Navigator.push(
                 context,
@@ -326,7 +336,7 @@ class InquirySuccessScreen extends StatelessWidget {
                   builder: (context) => const MapScreen(),
                 ),
               );
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
           ],
         ),
       ),
@@ -334,7 +344,7 @@ class InquirySuccessScreen extends StatelessWidget {
   }
 
   Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
-      double screenHeight, double screenWidth) {
+      double screenHeight, double screenWidth, BuildContext context) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -344,8 +354,8 @@ class InquirySuccessScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.01),
             Expanded(
               child: Container(
-                width: 45,
-                height: 35,
+                width: 40.w,
+                height: 30.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/$iconUrl'),
@@ -355,14 +365,8 @@ class InquirySuccessScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontFamily: 'Ubuntu',
-                ),
-              ),
+              child:
+                  Text(label, style: Theme.of(context).textTheme.labelMedium),
             ),
           ],
         ),

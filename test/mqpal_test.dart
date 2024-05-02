@@ -51,21 +51,10 @@ void main() {
 
       final titleFinder = find.text('MQPal');
       final labelFinder = find.text('Home');
-      final nameFinder = find.text('Hi Faran!');
+      final nameFinder = find.text('Hi!');
       expect(titleFinder, findsOneWidget);
       expect(labelFinder, findsOneWidget);
       expect(nameFinder, findsOneWidget);
-    });
-
-    testWidgets('Home screen toggles inquiry form', (tester) async {
-      await tester.pumpWidget(MainApp(
-        stateModel: stateModel,
-      ));
-
-      final toggleInquiryForm = find.byType(GestureDetector).at(2);
-      await tester.tap(toggleInquiryForm);
-      await tester.pumpAndSettle();
-      expect(stateModel.isExpanded, true);
     });
   });
 

@@ -5,6 +5,7 @@ import 'package:mqpal/screens/update_inquiry_screen.dart';
 import 'package:mqpal/state.dart';
 import 'package:mqpal/widgets/inquiry.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class InquiryDetailsScreen extends StatelessWidget {
   final Inquiry inquiry;
@@ -82,7 +83,7 @@ class InquiryDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(screenHeight * 0.09),
+        preferredSize: Size.fromHeight(9.h),
         child: AppBar(
           leading: IconButton(
             key: const Key('edit_button'),
@@ -100,7 +101,7 @@ class InquiryDetailsScreen extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
           centerTitle: true,
-          toolbarHeight: screenHeight * 0.09,
+          toolbarHeight: 9.h,
         ),
       ),
       body: SingleChildScrollView(
@@ -111,20 +112,20 @@ class InquiryDetailsScreen extends StatelessWidget {
           ),
           child: Padding(
             padding: EdgeInsets.only(
-              left: screenWidth * 0.05,
-              right: screenWidth * 0.05,
-              top: screenHeight * 0.015,
-              bottom: screenHeight * 0.1,
+              left: 5.w,
+              right: 5.w,
+              top: 1.5.h,
+              bottom: 10.h,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: screenWidth * 0.9,
+                  width: 90.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(screenWidth * 0.02),
-                      topRight: Radius.circular(screenWidth * 0.02),
+                      topLeft: Radius.circular(2.w),
+                      topRight: Radius.circular(2.w),
                     ),
                     color: Theme.of(context).colorScheme.surface,
                     border: Border.all(
@@ -135,10 +136,10 @@ class InquiryDetailsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: screenHeight * 0.02),
+                      SizedBox(height: 2.w),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: screenWidth * 0.05,
+                          horizontal: 5.w,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +160,7 @@ class InquiryDetailsScreen extends StatelessWidget {
                                       color: Theme.of(context)
                                           .colorScheme
                                           .secondary,
-                                      size: 30,
+                                      size: 25.sp,
                                     ),
                                     onPressed: () => Navigator.push(
                                       context,
@@ -172,17 +173,16 @@ class InquiryDetailsScreen extends StatelessWidget {
                                   ),
                               ],
                             ),
-                            SizedBox(height: screenHeight * 0.01),
+                            SizedBox(height: 1.h),
                             Text(
                               'Description',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
-                            SizedBox(height: screenHeight * 0.01),
+                            SizedBox(height: 1.h),
                             Container(
-                              width: screenWidth * 0.8,
+                              width: 80.w,
                               padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth * 0.016,
-                                  vertical: screenHeight * 0.016),
+                                  horizontal: 1.6.w, vertical: 1.6.h),
                               decoration: ShapeDecoration(
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -199,35 +199,33 @@ class InquiryDetailsScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ),
-                            SizedBox(height: screenHeight * 0.01),
+                            SizedBox(height: 1.h),
                             Text(
                               'Submission time: ${inquiry.date} - ${inquiry.time}',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
-                            SizedBox(height: screenHeight * 0.01),
+                            SizedBox(height: 1.h),
                             Text(
                               'Status: ${inquiry.status}',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
-                            SizedBox(height: screenHeight * 0.02),
+                            SizedBox(height: 1.h),
                           ],
                         ),
                       ),
                       Center(
                         child: Padding(
                           padding: EdgeInsets.only(
-                            left: screenWidth * 0.004,
-                            right: screenWidth * 0.004,
+                            left: 0.4.w,
+                            right: 0.4.w,
                           ),
                           child: Container(
-                            width: screenWidth * 0.9,
+                            width: 90.w,
                             decoration: ShapeDecoration(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                                  bottomRight:
-                                      Radius.circular(screenWidth * 0.02),
-                                  bottomLeft:
-                                      Radius.circular(screenWidth * 0.02),
+                                  bottomRight: Radius.circular(2.w),
+                                  bottomLeft: Radius.circular(2.w),
                                 ),
                                 side: BorderSide(
                                   width: 2,
@@ -243,16 +241,15 @@ class InquiryDetailsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.02),
+                SizedBox(height: 3.w),
                 if (inquiry.status != 'Cancelled')
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
                     child: GestureDetector(
                       onTap: () => _cancelInquiry(context),
                       child: Container(
-                        width: screenWidth * 0.8,
-                        height: screenHeight * 0.06,
+                        width: 80.w,
+                        height: 6.h,
                         decoration: ShapeDecoration(
                           color: Theme.of(context).colorScheme.secondary,
                           shape: RoundedRectangleBorder(
@@ -275,7 +272,7 @@ class InquiryDetailsScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         width: screenWidth,
-        height: screenHeight * 0.087,
+        height: 8.7.h,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
           border: Border.all(
@@ -301,10 +298,10 @@ class InquiryDetailsScreen extends StatelessWidget {
                   builder: (context) => const SubmittedInquiriesScreen(),
                 ),
               );
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
             _buildNavButton('Home', 'home-page.png', () {
               Navigator.popUntil(context, (route) => route.isFirst);
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
             _buildNavButton('Map', 'map.png', () {
               Navigator.push(
                 context,
@@ -312,7 +309,7 @@ class InquiryDetailsScreen extends StatelessWidget {
                   builder: (context) => const MapScreen(),
                 ),
               );
-            }, screenHeight, screenWidth),
+            }, screenHeight, screenWidth, context),
           ],
         ),
       ),
@@ -320,7 +317,7 @@ class InquiryDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
-      double screenHeight, double screenWidth) {
+      double screenHeight, double screenWidth, BuildContext context) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -330,8 +327,8 @@ class InquiryDetailsScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.01),
             Expanded(
               child: Container(
-                width: 45,
-                height: 35,
+                width: 40.w,
+                height: 30.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/$iconUrl'),
@@ -341,14 +338,8 @@ class InquiryDetailsScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontFamily: 'Ubuntu',
-                ),
-              ),
+              child:
+                  Text(label, style: Theme.of(context).textTheme.labelMedium),
             ),
           ],
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mqpal/state.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/screens/inquiry_success.dart';
+import 'package:sizer/sizer.dart';
 
 class Inquiry {
   final String title;
@@ -84,7 +85,7 @@ class _NewInquiryState extends State<NewInquiry> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: EdgeInsets.symmetric(vertical: 3.sp),
           child: Text(
             label,
             style: Theme.of(context).textTheme.displaySmall,
@@ -92,15 +93,15 @@ class _NewInquiryState extends State<NewInquiry> {
         ),
         Container(
           width: double.infinity,
+          height: 7.h,
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   width: 1, color: Theme.of(context).colorScheme.onSurface),
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(5.sp),
             ),
           ),
-          padding: EdgeInsets.symmetric(
-              horizontal: screenWidth * 0.016, vertical: screenHeight * 0.010),
+          padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 3.sp),
           child: TextField(
             controller: controller,
             decoration: InputDecoration(
@@ -119,14 +120,14 @@ class _NewInquiryState extends State<NewInquiry> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: EdgeInsets.symmetric(vertical: 3.sp),
           child: Text(
             'Description',
             style: Theme.of(context).textTheme.displaySmall,
           ),
         ),
         Container(
-          height: screenHeight * 0.155,
+          height: 15.5.h,
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
               side: BorderSide(
@@ -134,7 +135,7 @@ class _NewInquiryState extends State<NewInquiry> {
               borderRadius: BorderRadius.circular(5),
             ),
           ),
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.016),
+          padding: EdgeInsets.symmetric(horizontal: 1.6.h),
           child: TextField(
               controller: _descriptionController,
               maxLines: null,
@@ -160,7 +161,7 @@ class _NewInquiryState extends State<NewInquiry> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: screenHeight * 0.011),
+          padding: EdgeInsets.only(bottom: 1.h),
           child: Text(
             'About Inquiries',
             style: Theme.of(context).textTheme.displaySmall,
@@ -168,7 +169,7 @@ class _NewInquiryState extends State<NewInquiry> {
         ),
         Text(
           'You may ask about anything as long it is in relation to your studies and experiences on campus! Make sure you provide all relevant details. Keep in mind that your inquiry may be used for training purposes. If you wish for your inquiries to be confidential, ensure that you mention that in your inquiry.\n',
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.displaySmall,
         ),
       ],
     );
@@ -278,67 +279,70 @@ class _NewInquiryState extends State<NewInquiry> {
   Widget build(context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.circular(((screenWidth + screenHeight) / 2) * 0.015),
-          color: Theme.of(context).colorScheme.surface,
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(((screenWidth + screenHeight) / 2) * 0.021),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: screenHeight * 0.008),
-                      child: Text(
-                        'Inquiry Form',
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Provider.of<StateModel>(context, listen: false)
-                          .toggleInquiryForm();
-                    },
-                    child: SizedBox(
-                      width: screenWidth * 0.11,
-                      height: screenHeight * 0.04,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.close,
-                          color: Theme.of(context).colorScheme.secondary,
-                          size: 45,
+    return Scrollbar(
+      radius: Radius.circular(5.sp),
+      child: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+                ((screenWidth + screenHeight) / 2) * 0.015),
+            color: Theme.of(context).colorScheme.surface,
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(((screenWidth + screenHeight) / 2) * 0.021),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: screenHeight * 0.008),
+                        child: Text(
+                          'Inquiry Form',
+                          style: Theme.of(context).textTheme.displayMedium,
                         ),
-                        onPressed: () {
-                          Provider.of<StateModel>(context, listen: false)
-                              .toggleInquiryForm();
-                        },
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Divider(
-                thickness: 3,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              buildAboutBox(screenHeight),
-              SizedBox(height: screenHeight * 0.007),
-              buildTextFieldWithLabel(
-                  'Title', _titleController, screenHeight, screenWidth),
-              SizedBox(height: screenHeight * 0.007),
-              buildDescriptionField(screenHeight, screenWidth),
-              SizedBox(height: screenHeight * 0.014),
-              buildSubmitButton(screenWidth, screenHeight),
-              SizedBox(height: screenHeight * 0.004),
-            ],
+                    GestureDetector(
+                      onTap: () {
+                        Provider.of<StateModel>(context, listen: false)
+                            .toggleInquiryForm();
+                      },
+                      child: SizedBox(
+                        width: screenWidth * 0.11,
+                        height: screenHeight * 0.04,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.close,
+                            color: Theme.of(context).colorScheme.secondary,
+                            size: 26.sp,
+                          ),
+                          onPressed: () {
+                            Provider.of<StateModel>(context, listen: false)
+                                .toggleInquiryForm();
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  thickness: 3,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                buildAboutBox(screenHeight),
+                SizedBox(height: 1.h),
+                buildTextFieldWithLabel(
+                    'Title', _titleController, screenHeight, screenWidth),
+                SizedBox(height: 1.h),
+                buildDescriptionField(screenHeight, screenWidth),
+                SizedBox(height: 1.h),
+                buildSubmitButton(screenWidth, screenHeight),
+                SizedBox(height: 1.h),
+              ],
+            ),
           ),
         ),
       ),
