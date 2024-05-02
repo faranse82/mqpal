@@ -85,6 +85,7 @@ class InquiryDetailsScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(screenHeight * 0.09),
         child: AppBar(
           leading: IconButton(
+            key: const Key('edit_button'),
             icon: Icon(
               Icons.arrow_back,
               color: Theme.of(context).colorScheme.onPrimary,
@@ -95,7 +96,7 @@ class InquiryDetailsScreen extends StatelessWidget {
             },
           ),
           title: Text('Inquiry Details',
-              style: Theme.of(context).textTheme.titleLarge),
+              style: Theme.of(context).textTheme.displayMedium),
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
           centerTitle: true,
@@ -110,8 +111,8 @@ class InquiryDetailsScreen extends StatelessWidget {
           ),
           child: Padding(
             padding: EdgeInsets.only(
-              left: 23,
-              right: 23,
+              left: screenWidth * 0.05,
+              right: screenWidth * 0.05,
               top: screenHeight * 0.015,
               bottom: screenHeight * 0.1,
             ),
@@ -121,6 +122,10 @@ class InquiryDetailsScreen extends StatelessWidget {
                 Container(
                   width: screenWidth * 0.9,
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(screenWidth * 0.02),
+                      topRight: Radius.circular(screenWidth * 0.02),
+                    ),
                     color: Theme.of(context).colorScheme.surface,
                     border: Border.all(
                       color: Colors.black.withOpacity(0.2),
@@ -130,18 +135,6 @@ class InquiryDetailsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: screenWidth * 0.9,
-                        decoration: ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              width: 3,
-                              strokeAlign: BorderSide.strokeAlignCenter,
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                          ),
-                        ),
-                      ),
                       SizedBox(height: screenHeight * 0.02),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -187,8 +180,9 @@ class InquiryDetailsScreen extends StatelessWidget {
                             SizedBox(height: screenHeight * 0.01),
                             Container(
                               width: screenWidth * 0.8,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 16),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: screenWidth * 0.016,
+                                  vertical: screenHeight * 0.016),
                               decoration: ShapeDecoration(
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -217,6 +211,33 @@ class InquiryDetailsScreen extends StatelessWidget {
                             ),
                             SizedBox(height: screenHeight * 0.02),
                           ],
+                        ),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: screenWidth * 0.004,
+                            right: screenWidth * 0.004,
+                          ),
+                          child: Container(
+                            width: screenWidth * 0.9,
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  bottomRight:
+                                      Radius.circular(screenWidth * 0.02),
+                                  bottomLeft:
+                                      Radius.circular(screenWidth * 0.02),
+                                ),
+                                side: BorderSide(
+                                  width: 2,
+                                  strokeAlign: BorderSide.strokeAlignCenter,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -280,10 +301,10 @@ class InquiryDetailsScreen extends StatelessWidget {
                   builder: (context) => const SubmittedInquiriesScreen(),
                 ),
               );
-            }),
+            }, screenHeight, screenWidth),
             _buildNavButton('Home', 'home-page.png', () {
               Navigator.popUntil(context, (route) => route.isFirst);
-            }),
+            }, screenHeight, screenWidth),
             _buildNavButton('Map', 'map.png', () {
               Navigator.push(
                 context,
@@ -291,41 +312,46 @@ class InquiryDetailsScreen extends StatelessWidget {
                   builder: (context) => const MapScreen(),
                 ),
               );
-            }),
+            }, screenHeight, screenWidth),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Container(
-              width: 55,
-              height: 45,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/$iconUrl'),
-                  fit: BoxFit.contain,
+  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
+      double screenHeight, double screenWidth) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: screenHeight * 0.01),
+            Expanded(
+              child: Container(
+                width: 45,
+                height: 35,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/$iconUrl'),
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontFamily: 'Ubuntu',
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Ubuntu',
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

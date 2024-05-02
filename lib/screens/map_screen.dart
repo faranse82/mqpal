@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mqpal/screens/home_screen.dart';
 import 'package:mqpal/screens/submitted_inquiries.dart';
 
 class MapScreen extends StatelessWidget {
@@ -46,10 +45,10 @@ class MapScreen extends StatelessWidget {
             Expanded(
               child: InteractiveViewer(
                 panEnabled: true,
-                boundaryMargin: const EdgeInsets.all(100),
                 minScale: 0.8,
                 maxScale: 5,
                 child: Image.asset(
+                  key: const Key('map-key'),
                   'assets/images/mq-campus-map.png',
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.center,
@@ -57,79 +56,81 @@ class MapScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: screenWidth,
-              height: screenHeight * 0.087,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.25),
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme.of(context).colorScheme.primary,
-                    blurRadius: 6,
-                    offset: const Offset(0, -1),
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildNavButton('Inquiries', 'inquiries.png', () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SubmittedInquiriesScreen(),
-                      ),
-                    );
-                  }),
-                  _buildNavButton('Home', 'home-page.png', () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
-                    );
-                  }),
-                  _buildNavButton('Map', 'map.png', () {}),
-                ],
-              ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        width: screenWidth,
+        height: screenHeight * 0.087,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          border: Border.all(
+            color: Colors.black.withOpacity(0.25),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.primary,
+              blurRadius: 6,
+              offset: const Offset(0, -1),
+              spreadRadius: 0,
             ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildNavButton('Inquiries', 'inquiries.png', () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SubmittedInquiriesScreen(),
+                ),
+              );
+            }, screenHeight, screenWidth),
+            _buildNavButton('Home', 'home-page.png', () {
+              Navigator.popUntil(context, (route) => route.isFirst);
+            }, screenHeight, screenWidth),
+            _buildNavButton('Map', 'map.png', () {}, screenHeight, screenWidth),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 55,
-            height: 45,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/$iconUrl'),
-                fit: BoxFit.contain,
+  Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
+      double screenHeight, double screenWidth) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: screenHeight * 0.01),
+            Expanded(
+              child: Container(
+                width: 45,
+                height: 35,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/$iconUrl'),
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontFamily: 'Ubuntu',
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Ubuntu',
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

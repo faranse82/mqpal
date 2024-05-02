@@ -65,8 +65,10 @@ class _NewInquiryState extends State<NewInquiry> {
       time: time,
       status: status,
     );
+    Navigator.pop(context); //close confirmation box
     Provider.of<StateModel>(context, listen: false).addInquiry(inquiry);
-    Provider.of<StateModel>(context, listen: false).toggleInquiryForm();
+    Provider.of<StateModel>(context, listen: false)
+        .toggleInquiryForm(); //close the inquiry form
 
     Navigator.push(
       context,
@@ -76,8 +78,8 @@ class _NewInquiryState extends State<NewInquiry> {
     );
   }
 
-  Widget buildTextFieldWithLabel(
-      String label, TextEditingController controller) {
+  Widget buildTextFieldWithLabel(String label, TextEditingController controller,
+      double screenHeight, double screenWidth) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -97,7 +99,8 @@ class _NewInquiryState extends State<NewInquiry> {
               borderRadius: BorderRadius.circular(5),
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.016, vertical: screenHeight * 0.010),
           child: TextField(
             controller: controller,
             decoration: InputDecoration(
@@ -111,7 +114,7 @@ class _NewInquiryState extends State<NewInquiry> {
     );
   }
 
-  Widget buildDescriptionField(double screenHeight) {
+  Widget buildDescriptionField(double screenHeight, double screenWidth) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -131,7 +134,7 @@ class _NewInquiryState extends State<NewInquiry> {
               borderRadius: BorderRadius.circular(5),
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.016),
           child: TextField(
               controller: _descriptionController,
               maxLines: null,
@@ -152,12 +155,12 @@ class _NewInquiryState extends State<NewInquiry> {
     );
   }
 
-  Widget buildAboutBox() {
+  Widget buildAboutBox(double screenHeight) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 10),
+          padding: EdgeInsets.only(bottom: screenHeight * 0.011),
           child: Text(
             'About Inquiries',
             style: Theme.of(context).textTheme.displaySmall,
@@ -278,11 +281,12 @@ class _NewInquiryState extends State<NewInquiry> {
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius:
+              BorderRadius.circular(((screenWidth + screenHeight) / 2) * 0.015),
           color: Theme.of(context).colorScheme.surface,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(((screenWidth + screenHeight) / 2) * 0.021),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -290,9 +294,12 @@ class _NewInquiryState extends State<NewInquiry> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: Text(
-                      'Inquiry Form',
-                      style: Theme.of(context).textTheme.displayMedium,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: screenHeight * 0.008),
+                      child: Text(
+                        'Inquiry Form',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
                     ),
                   ),
                   GestureDetector(
@@ -300,30 +307,37 @@ class _NewInquiryState extends State<NewInquiry> {
                       Provider.of<StateModel>(context, listen: false)
                           .toggleInquiryForm();
                     },
-                    child: Container(
-                      width: screenWidth * 0.08,
+                    child: SizedBox(
+                      width: screenWidth * 0.11,
                       height: screenHeight * 0.04,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/close.png'),
-                          fit: BoxFit.fill,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.close,
+                          color: Theme.of(context).colorScheme.secondary,
+                          size: 45,
                         ),
+                        onPressed: () {
+                          Provider.of<StateModel>(context, listen: false)
+                              .toggleInquiryForm();
+                        },
                       ),
                     ),
                   ),
                 ],
               ),
-              const Divider(
+              Divider(
                 thickness: 3,
+                color: Theme.of(context).colorScheme.secondary,
               ),
-              buildAboutBox(),
-              const SizedBox(height: 8.0),
-              buildTextFieldWithLabel('Title', _titleController),
-              const SizedBox(height: 8.0),
-              buildDescriptionField(screenHeight),
-              const SizedBox(height: 16.0),
+              buildAboutBox(screenHeight),
+              SizedBox(height: screenHeight * 0.007),
+              buildTextFieldWithLabel(
+                  'Title', _titleController, screenHeight, screenWidth),
+              SizedBox(height: screenHeight * 0.007),
+              buildDescriptionField(screenHeight, screenWidth),
+              SizedBox(height: screenHeight * 0.014),
               buildSubmitButton(screenWidth, screenHeight),
-              const SizedBox(height: 8.0),
+              SizedBox(height: screenHeight * 0.004),
             ],
           ),
         ),
