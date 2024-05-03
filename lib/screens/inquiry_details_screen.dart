@@ -97,7 +97,7 @@ class InquiryDetailsScreen extends StatelessWidget {
             },
           ),
           title: Text('Inquiry Details',
-              style: Theme.of(context).textTheme.displayMedium),
+              style: Theme.of(context).textTheme.titleLarge),
           backgroundColor: Theme.of(context).colorScheme.primary,
           elevation: 0,
           centerTitle: true,
