@@ -131,8 +131,8 @@ class InquirySuccessScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(
-                            (screenHeight + screenWidth) / 2 * 0.022),
+                        padding: EdgeInsets.only(
+                            top: 5.sp, bottom: 5.sp, left: 10.sp),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -140,30 +140,25 @@ class InquirySuccessScreen extends StatelessWidget {
                               'Inquiry Details',
                               style: Theme.of(context).textTheme.displayMedium,
                             ),
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(left: screenWidth * 0.22),
-                              child: Positioned(
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.edit,
-                                    size: 40,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            UpdateInquiryScreen(
-                                                inquiry: inquiry),
-                                      ),
-                                    );
-                                  },
+                            Positioned(
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.edit,
+                                  size: 40,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                 ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          UpdateInquiryScreen(inquiry: inquiry),
+                                    ),
+                                  );
+                                },
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -194,14 +189,14 @@ class InquirySuccessScreen extends StatelessWidget {
                               'Title: ${inquiry.title}',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
-                            SizedBox(height: screenHeight * 0.02),
+                            SizedBox(height: screenHeight * 0.01),
                             Text(
                               'Description',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             SizedBox(height: screenHeight * 0.01),
                             Container(
-                              height: screenHeight * 0.2,
+                              height: screenHeight * 0.15,
                               width: screenWidth * 0.9,
                               padding: EdgeInsets.all(
                                   (screenHeight + screenWidth) / 2 * 0.01),

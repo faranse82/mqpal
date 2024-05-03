@@ -248,7 +248,7 @@ class _NewInquiryState extends State<NewInquiry> {
                     ),
                     child: Text(
                       'Yes',
-                      style: Theme.of(context).textTheme.labelMedium,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ],
