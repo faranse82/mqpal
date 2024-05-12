@@ -16,6 +16,7 @@ class InquirySuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //used to set relative sizes for elements
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -259,6 +260,7 @@ class InquirySuccessScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                //return home button
                 Padding(
                   padding: EdgeInsets.only(top: screenHeight * 0.016),
                   child: GestureDetector(
@@ -292,6 +294,7 @@ class InquirySuccessScreen extends StatelessWidget {
           ),
         ),
       ),
+      //bottom nav bar
       bottomNavigationBar: Container(
         width: screenWidth,
         height: screenHeight * 0.087,

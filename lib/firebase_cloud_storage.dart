@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
 class FirebaseStorageService {
+  // encodes the list inquiries that were passed to it into a json file which is then uploaded to firebase storage
   static Future<String> uploadInquiriesToStorage(
       List<Inquiry> inquiries) async {
     try {
@@ -28,6 +29,7 @@ class FirebaseStorageService {
   }
 
   static Future<List<Inquiry>> loadInquiriesFromStorage() async {
+    // downloads the inquiries.json files from firebase server, decodes it, and is then turned into a list which is shown in the submitted inquiries screen
     try {
       final ref =
           FirebaseStorage.instance.ref().child('inquiries/inquiries.json');
@@ -46,6 +48,7 @@ class FirebaseStorageService {
     }
   }
 
+  // encodes the theme state into a json file which is then uploaded to firebase servers
   static Future<String> uploadConfigToStorage(Config config) async {
     final jsonData = json.encode(config.toJson());
     final tempDir = await getTemporaryDirectory();
@@ -59,6 +62,7 @@ class FirebaseStorageService {
     return downloadUrl;
   }
 
+  // downlods config.json, decodes it, and sets whether or not the app should open in dark or light mode
   static Future<Config> loadConfigFromStorage() async {
     final ref = FirebaseStorage.instance.ref().child('config/config.json');
     final downloadUrl = await ref.getDownloadURL();

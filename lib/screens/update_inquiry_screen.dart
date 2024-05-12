@@ -31,15 +31,18 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
 
   @override
   void dispose() {
+    //closes the text input boxes
     _titleController.dispose();
     _descriptionController.dispose();
     super.dispose();
   }
 
+  //basically updates it locally first, and then all inquiries are uploaded to firebase.
   void _updateInquiry() {
     final String updatedTitle = _titleController.text;
     final String updatedDescription = _descriptionController.text;
 
+    //
     final updatedInquiry = Inquiry(
       title: updatedTitle,
       description: updatedDescription,
@@ -103,6 +106,8 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //used to set relative sizes for elements
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -251,6 +256,7 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
                 ),
               ),
               GestureDetector(
+                //essentially sends list from device to firebase
                 onTap: _updateInquiry,
                 child: Container(
                   width: screenWidth * 0.9,
@@ -274,6 +280,7 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
           ),
         ),
       ),
+      //bottom nav bar
       bottomNavigationBar: Container(
         width: screenWidth,
         height: screenHeight * 0.087,

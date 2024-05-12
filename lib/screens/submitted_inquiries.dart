@@ -11,16 +11,22 @@ class SubmittedInquiriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //used to set relative sizes for elements
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    // array of inquiries
     final inquiries = Provider.of<StateModel>(context).inquiries;
 
+    //splitting them based on whether they are in progress or not
     final inProgressInquiries =
         inquiries.where((inquiry) => inquiry.status == 'In progress').toList();
     final completedInquiries =
         inquiries.where((inquiry) => inquiry.status != 'In progress').toList();
 
     return Scaffold(
+      //top bar
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenHeight * 0.09),
         child: AppBar(
@@ -130,6 +136,8 @@ class SubmittedInquiriesScreen extends StatelessWidget {
           width: 1,
         ),
       ),
+
+      // checks if the inquiries list is empty, if yes, feedback is given to the user that there are no inquiries
       child: inquiries.isEmpty
           ? Padding(
               padding: EdgeInsets.all((screenHeight + screenWidth) * 0.011),
@@ -147,6 +155,7 @@ class SubmittedInquiriesScreen extends StatelessWidget {
 
                 return GestureDetector(
                   onTap: () {
+                    //takes user to the clicked on inquiry
                     Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -7,6 +7,7 @@ import 'package:mqpal/widgets/inquiry.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+// the screen you see after you submit an inquiry
 class InquiryDetailsScreen extends StatelessWidget {
   final Inquiry inquiry;
 
@@ -42,6 +43,7 @@ class InquiryDetailsScreen extends StatelessWidget {
             ),
           ),
           ElevatedButton(
+            // creates an inquiry object and is then sent to the UpdateInquiry function in Staate
             onPressed: () {
               final updatedInquiry = Inquiry(
                 title: inquiry.title,
@@ -82,6 +84,7 @@ class InquiryDetailsScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      //top nav bar
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(9.h),
         child: AppBar(
@@ -162,6 +165,7 @@ class InquiryDetailsScreen extends StatelessWidget {
                                           .secondary,
                                       size: 25.sp,
                                     ),
+                                    //opens update inquiry screen and provides it with the current inquiry
                                     onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -213,6 +217,7 @@ class InquiryDetailsScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+                      //bottom coloured part of the block
                       Center(
                         child: Padding(
                           padding: EdgeInsets.only(
@@ -242,6 +247,8 @@ class InquiryDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 3.w),
+
+                // shows the cancel button only if the status is not already cancelled.
                 if (inquiry.status != 'Cancelled')
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -270,6 +277,8 @@ class InquiryDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
+
+      //Bottom nav bar
       bottomNavigationBar: Container(
         width: screenWidth,
         height: 8.7.h,

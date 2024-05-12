@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mqpal/screens/map_screen.dart';
 import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
-import 'package:provider/provider.dart';
 import 'package:mqpal/widgets/inquiry.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //used to set relative sizes for elements
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -67,6 +68,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            //dark mode button
             Padding(
               padding: EdgeInsets.only(top: 5.6.h, left: 86.w),
               child: GestureDetector(
@@ -121,6 +123,7 @@ class HomeScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.displayMedium,
                           ),
                         ),
+                        //map widget
                         Positioned(
                           left: 3.2.w,
                           right: 3.2.w,
@@ -164,6 +167,8 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+
+                  // the bottom part of the block
                   Center(
                     child: Padding(
                       padding: EdgeInsets.only(
@@ -233,10 +238,12 @@ class HomeScreen extends StatelessWidget {
                             top: 7.h,
                           ),
                           child: Text(
-                            'Have a question about your studies? Submit and inquiry and we will help you out!',
+                            'Have a question about your studies? Submit an inquiry and we will help you out!',
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
+
+                        //inquiry submission button
                         Padding(
                           padding: EdgeInsets.only(
                             left: 30.w,
@@ -269,6 +276,8 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+
+                  // the bottom part of the block
                   Center(
                     child: Padding(
                       padding: EdgeInsets.only(
@@ -297,6 +306,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            //inquiry form
             Consumer<StateModel>(
               builder: (context, expandedProvider, _) {
                 return Visibility(
@@ -376,6 +386,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  // builds each navbar button
   Widget _buildNavButton(String label, String iconUrl, VoidCallback onTap,
       double screenHeight, double screenWidth, BuildContext context) {
     return Expanded(
