@@ -6,6 +6,7 @@ import 'package:mqpal/state.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sizer/sizer.dart';
 
+// dark and light themes. note: sp means scalable pixel and it is from the sizer package.
 final lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
     primary: Color.fromARGB(255, 166, 25, 06),
@@ -160,11 +161,12 @@ final darkTheme = ThemeData(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  //launches firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final stateModel = StateModel();
-  await stateModel.loadInquiries();
-  await stateModel.loadConfig();
+  await stateModel.loadInquiries(); //loads inquiries
+  await stateModel.loadConfig(); //loads config, (essentially the theme)
+  // all functions relating to launching and loading things from firebase is done prior to running the app to ensure the app is loaded in the correcdt state
   runApp(MainApp(
     stateModel: stateModel,
   ));

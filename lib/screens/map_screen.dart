@@ -11,6 +11,7 @@ class MapScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      //top bar
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenHeight * 0.09),
         child: AppBar(
@@ -60,6 +61,7 @@ class MapScreen extends StatelessWidget {
           ],
         ),
       ),
+      //bottom nav bar
       bottomNavigationBar: Container(
         width: screenWidth,
         height: screenHeight * 0.087,

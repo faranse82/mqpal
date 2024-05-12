@@ -48,6 +48,7 @@ class NewInquiry extends StatefulWidget {
 }
 
 class _NewInquiryState extends State<NewInquiry> {
+  // input text boxes
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
@@ -279,6 +280,8 @@ class _NewInquiryState extends State<NewInquiry> {
   Widget build(context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+    //used to set relative sizes for elements
+
     return Scrollbar(
       radius: Radius.circular(5.sp),
       child: SingleChildScrollView(

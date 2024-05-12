@@ -1,3 +1,5 @@
+// reads and saves theme state to a config json file which is saved on firebase
+
 class Config {
   final bool isDarkMode;
 

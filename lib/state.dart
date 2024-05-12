@@ -8,7 +8,6 @@ class StateModel with ChangeNotifier {
   bool _isMapOpen = false;
   bool _isDarkMode = false;
   bool _isSuccessInq = false;
-  String _userId = '';
   bool _hasAnswered = false;
   List<Inquiry> _inquiries = [];
 
@@ -18,53 +17,54 @@ class StateModel with ChangeNotifier {
   bool get isDarkMode => _isDarkMode;
   bool get isSuccessInq => _isSuccessInq;
   bool get hasAnswered => _hasAnswered;
-  String get userId => _userId;
-
   List<Inquiry> get inquiries => _inquiries;
 
   // Setters
 
+  //opens/closes inquiry form
   void toggleInquiryForm() {
     _isExpanded = !_isExpanded;
     notifyListeners();
   }
 
+  //submits inquiry form
   void submitInquiryForm() {
     _isSuccessInq = true;
     notifyListeners();
   }
 
+  //closes/opens the confirmation box
   void toggleConfirmation() {
     _hasAnswered = !hasAnswered;
     notifyListeners();
   }
 
+  //resets inquiry form after use
   void resetInquiryForm() {
     _isSuccessInq = false;
     notifyListeners();
   }
 
+  //opens closes map
   void toggleMap() {
     _isMapOpen = !_isMapOpen;
     notifyListeners();
   }
 
+  //toggles theme
   void toggleDarkMode() {
     _isDarkMode = !_isDarkMode;
     saveConfig();
     notifyListeners();
   }
 
-  void setUserId(String userId) {
-    _userId = userId;
-    notifyListeners();
-  }
-
+  //downloads and loads inquiries from firebase
   Future<void> loadInquiries() async {
     _inquiries = await FirebaseStorageService.loadInquiriesFromStorage();
     notifyListeners();
   }
 
+  //adds submitted inquiry to the app and saves it to firebase
   Future<void> addInquiry(Inquiry inquiry) async {
     try {
       _inquiries.add(inquiry);
@@ -75,6 +75,7 @@ class StateModel with ChangeNotifier {
     }
   }
 
+  //uploads the current inquiries to firebase
   void updateInquiry(Inquiry oldInquiry, Inquiry newInquiry) {
     final index = _inquiries.indexOf(oldInquiry);
     if (index != -1) {
@@ -84,6 +85,7 @@ class StateModel with ChangeNotifier {
     }
   }
 
+  // custom pop up notifaction for cancelling or updating inquiries
   void popUpMessage(String transaction, BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -101,12 +103,14 @@ class StateModel with ChangeNotifier {
     );
   }
 
+  //load theme on to the app.
   Future<void> loadConfig() async {
     final config = await FirebaseStorageService.loadConfigFromStorage();
     _isDarkMode = config.isDarkMode;
     notifyListeners();
   }
 
+  //uploads current theme to firebase
   Future<void> saveConfig() async {
     final config = Config(isDarkMode: _isDarkMode);
     await FirebaseStorageService.uploadConfigToStorage(config);
