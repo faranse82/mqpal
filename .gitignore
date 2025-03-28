@@ -1,14 +1,113 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
-migrate_working_dir/
+# Flutter/Dart specific
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+build/
+pubspec.lock
+
+# Android build and generated files
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.*
+**/android/key.properties
+**/android/.idea/
+**/android/*.iml
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/android/gradle/wrapper/
+**/android/build/
+**/android/*.gradle
+**/android/*.properties
+**/android/app/src/main/res/drawable*/
+**/android/app/src/main/res/mipmap*/
+**/android/app/src/main/res/values*/
+**/android/app/src/main/res/xml/
+**/android/app/src/debug/
+**/android/app/src/profile/
+**/android/app/google-services.json
+
+# Android CMake build files - very specific to match your project
+**/android/app/cxx/
+**/android/app/.cxx/
+**/.cxx/
+**/Debug/
+**/android/**/Debug/
+**/android/**/CMakeFiles/
+**/android/**/*.ninja
+**/android/**/*.cmake
+**/android/**/c5m*
+**/android/**/CMake*.txt
+**/android/**/CMake*.bin
+**/android/**/CMake*.c
+**/android/**/CMake*.cpp
+**/android/**/CMake*.o
+**/android/**/*_file_index.txt
+**/android/**/cache-v2*
+**/android/**/codemodel-v2*
+**/android/**/cmakeFiles-v1*
+**/android/**/configure_fingerprint.bin
+**/android/**/metadata_generation_command.txt
+**/android/**/symbol_folder_index.txt
+**/android/**/prefab_config.json
+**/android/**/android_gradle_build*.json
+**/android/**/build.ninja
+**/android/**/rules.ninja
+**/android/**/additional_project_files.txt
+**/android/**/CMakeCache.txt
+**/android/**/CMakeOutput.log
+**/android/**/TargetDirectories.txt
+**/android/**/cmake_install.cmake
+**/android/**/*CompilerId*
+**/android/**/*.json
+
+# iOS/macOS related
+**/ios/
+
+# macOS related
+**/macos/
+
+# Windows related
+**/windows/flutter/ephemeral/
+**/windows/flutter/generated_plugin_registrant.*
+**/windows/**/*.cpp
+**/windows/**/*.h
+**/windows/**/*.exe.manifest
+**/windows/**/*.rc
+**/windows/**/*.ico
+**/windows/**/*.manifest
+**/windows/**/CMakeLists.txt
+**/windows/**/runner/
+**/windows/**/Flutter/
+**/windows/flutter/
+
+# Linux related
+**/linux/flutter/ephemeral/
+**/linux/flutter/generated_plugin_registrant.*
+**/linux/**/*.cc
+**/linux/**/*.h
+**/linux/**/CMakeLists.txt
+**/linux/flutter/
+
+# Web related
+**/web/favicon.png
+**/web/icons/
+**/web/**/*.png
+**/web/**/*.html
+**/web/**/*.json
+**/web/**/*.map
+**/web/**/*.js
+
+# VS Code related
+.vscode/
+*.code-workspace
 
 # IntelliJ related
 *.iml
@@ -16,28 +115,21 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Asset directories - keep these uncommented if you want to track assets
+# **/assets/fonts/
+# **/assets/images/
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
+# Exceptions - keep source code and important files
+!**/android/app/src/main/kotlin/**/*.kt
+!**/lib/**/*.dart
+!**/test/**/*.dart
+!pubspec.yaml
+!**/README.md
+!**/analysis_options.yaml
 
-# Symbolication related
-app.*.symbols
+# Generated Firebase files
+firebase_options.dart
 
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Explicitly tracked files that might be needed
+!.gitignore
+!.metadata
