@@ -20,7 +20,7 @@ class InquiryDetailsScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Theme.of(context).colorScheme.onBackground,
+        backgroundColor: Theme.of(context).colorScheme.onSurface,
         title: Text(
           'Confirmation',
           style: Theme.of(context).textTheme.displayMedium,
@@ -111,7 +111,7 @@ class InquiryDetailsScreen extends StatelessWidget {
         child: Container(
           width: screenWidth,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
           ),
           child: Padding(
             padding: EdgeInsets.only(

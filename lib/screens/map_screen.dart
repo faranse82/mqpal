@@ -38,7 +38,7 @@ class MapScreen extends StatelessWidget {
         height: screenHeight,
         clipBehavior: Clip.antiAlias,
         decoration:
-            BoxDecoration(color: Theme.of(context).colorScheme.background),
+            BoxDecoration(color: Theme.of(context).colorScheme.surface),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,

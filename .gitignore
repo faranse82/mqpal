@@ -33,6 +33,17 @@ pubspec.lock
 **/android/app/src/debug/
 **/android/app/src/profile/
 **/android/app/google-services.json
+.gradle/
+build/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/gradle/wrapper/gradle-wrapper.jar
+**/android/app/.gradle
+**/android/app/gradle
+**/android/app/gradlew
+**/android/app/gradlew.bat
+**/android/app/local.properties
+**/android/app/build/
 
 # Android CMake build files - very specific to match your project
 **/android/app/cxx/

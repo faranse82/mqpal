@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
         width: screenWidth,
         height: screenHeight,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.surface,
         ),
         child: Stack(
           children: [
@@ -324,7 +324,7 @@ class HomeScreen extends StatelessWidget {
                               width: containerWidth,
                               height: containerHeight,
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.background,
+                                color: Theme.of(context).colorScheme.surface,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: const NewInquiry(),

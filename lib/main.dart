@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mqpal/firebase_options.dart';
 import 'package:mqpal/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/state.dart';
@@ -11,8 +10,6 @@ final lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
     primary: Color.fromARGB(255, 166, 25, 06),
     onPrimary: Color.fromARGB(255, 255, 255, 255),
-    background: Colors.white,
-    onBackground: Colors.white,
     secondary: Color.fromARGB(255, 166, 25, 06),
     surface: Color.fromRGBO(222, 226, 230, 100),
     onSurface: Color.fromARGB(255, 147, 147, 147),
@@ -88,8 +85,6 @@ final darkTheme = ThemeData(
   colorScheme: const ColorScheme.dark(
       primary: Color.fromARGB(255, 34, 34, 34),
       onPrimary: Color.fromARGB(255, 88, 85, 85),
-      background: Color.fromARGB(255, 21, 21, 21),
-      onBackground: Color.fromARGB(255, 89, 89, 89),
       surface: Color.fromARGB(255, 48, 48, 48),
       onSurface: Color.fromARGB(255, 128, 128, 128),
       onError: Color.fromARGB(255, 65, 65, 65),
@@ -162,7 +157,7 @@ final darkTheme = ThemeData(
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //launches firebase
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp();
   final stateModel = StateModel();
   await stateModel.loadInquiries(); //loads inquiries
   await stateModel.loadConfig(); //loads config, (essentially the theme)
