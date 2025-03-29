@@ -185,7 +185,7 @@ class _NewInquiryState extends State<NewInquiry> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                backgroundColor: Theme.of(context).colorScheme.onBackground,
+                backgroundColor: Theme.of(context).colorScheme.onSurface,
                 title: Text(
                   'Missing Information',
                   style: Theme.of(context).textTheme.displayMedium,

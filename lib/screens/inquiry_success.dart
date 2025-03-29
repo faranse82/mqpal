@@ -47,7 +47,7 @@ class InquirySuccessScreen extends StatelessWidget {
           child: Container(
             width: screenWidth,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.surface,
             ),
             child: Column(
               children: [

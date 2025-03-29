@@ -139,7 +139,7 @@ class _UpdateInquiryScreenState extends State<UpdateInquiryScreen> {
           width: screenWidth,
           height: screenHeight,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
