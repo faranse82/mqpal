@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mqpal/main.dart';
 import 'package:mqpal/screens/map_screen.dart';
 import 'package:mqpal/screens/submitted_inquiries.dart';
 import 'package:mqpal/state.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         width: screenWidth,
         height: screenHeight,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
         child: Stack(
           children: [
@@ -64,8 +65,7 @@ class HomeScreen extends StatelessWidget {
               top: 12.4.h,
               child: Text(
                 'Hi!',
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
+                  style: Theme.of(context).textTheme.displayMedium),
             ),
 
             //dark mode button
@@ -77,8 +77,8 @@ class HomeScreen extends StatelessWidget {
                       .toggleDarkMode();
                 },
                 child: Container(
-                  width: 30.sp,
-                  height: 30.sp,
+                  width: 26.sp,
+                  height: 26.sp,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/images/toggleDark.png'),
@@ -161,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                           top: 23.5.h,
                           child: Text(
                             'Click on the MQU logo to view the map!',
-                            style: Theme.of(context).textTheme.displaySmall,
+
                           ),
                         ),
                       ],
