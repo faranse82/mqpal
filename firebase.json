@@ -1,1 +1,16 @@
-{"storage":{"rules":"storage.rules"},"flutter":{"platforms":{"android":{"default":{"projectId":"mqpal-project-664","appId":"1:1037381733761:android:dd37fe756c5e880116ec80","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"mqpal-project-664","configurations":{"android":"1:1037381733761:android:dd37fe756c5e880116ec80","web":"1:1037381733761:web:a9cac6feac0461ff16ec80"}}}}}}
+{
+    "storage": {
+        "rules": "storage.rules"
+    },
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "mqpal-project-664",
+                    "appId": "1:1037381733761:android:dd37fe756c5e880116ec80",
+                    "web": "1:1037381733761:web:a9cac6feac0461ff16ec80"
+                }
+            }
+        }
+    }
+}

@@ -52,7 +52,7 @@ class SubmittedInquiriesScreen extends StatelessWidget {
         child: Container(
           width: screenWidth,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           child: Padding(
             padding: EdgeInsets.only(
@@ -173,7 +173,7 @@ class SubmittedInquiriesScreen extends StatelessWidget {
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: Theme.of(context).colorScheme.onSurface,
+                        color: Theme.of(context).colorScheme.primary,
                         width: 1,
                       ),
                     ),
