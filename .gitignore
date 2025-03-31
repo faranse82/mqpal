@@ -1,0 +1,75 @@
+# Flutter/Dart specific
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+build/
+pubspec.lock
+
+# Android build and generated files
+**/android/.gradle
+**/android/captures/
+
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.*
+**/android/key.properties
+**/android/.idea/
+**/android/*.iml
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/android/build/
+**/android/app/.gradle
+**/android/app/build/
+
+# KEEP these Gradle files - they are essential
+!**/android/gradle/
+!**/android/gradle/wrapper/
+!**/android/gradle/wrapper/gradle-wrapper.jar
+!**/android/gradle/wrapper/gradle-wrapper.properties
+!**/android/gradlew
+!**/android/gradlew.bat
+!**/android/build.gradle
+!**/android/app/build.gradle
+!**/android/settings.gradle
+!**/android/gradle.properties
+
+# iOS/macOS related
+**/ios/
+**/macos/
+
+# Windows related
+**/windows/flutter/ephemeral/
+**/windows/flutter/generated_plugin_registrant.*
+
+# Linux related
+**/linux/flutter/ephemeral/
+**/linux/flutter/generated_plugin_registrant.*
+
+# Web related
+**/web/favicon.png
+**/web/icons/
+
+# IDE related
+.vscode/
+*.code-workspace
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Generated Firebase files
+**/lib/firebase_options.dart
+node_modules
+
+# Keep source code
+!**/android/app/src/main/kotlin/**/*.kt
+!**/lib/**/*.dart
+!**/test/**/*.dart
+!pubspec.yaml
+!**/README.md
+!**/analysis_options.yaml
+!.gitignore
+!.metadata
