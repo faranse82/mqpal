@@ -173,10 +173,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   final stateModel = StateModel();
   await stateModel.loadInquiries(); //loads inquiries
   await stateModel.loadConfig(); //loads config, (essentially the theme)
   // all functions relating to launching and loading things from firebase is done prior to running the app to ensure the app is loaded in the correcdt state
+
   runApp(MainApp(
     stateModel: stateModel,
   ));
