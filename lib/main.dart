@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
+import 'package:mqpal/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mqpal/state.dart';
 import 'package:sizer/sizer.dart';
@@ -200,7 +201,7 @@ class MainApp extends StatelessWidget {
               return MaterialApp(
                 title: 'MQPal',
                 theme: value.isDarkMode ? darkTheme : lightTheme,
-                home: const HomeScreen(),
+                home: const LoginPage(),
               );
             },
           ),
