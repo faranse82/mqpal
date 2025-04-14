@@ -16,6 +16,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -61,60 +62,106 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 3.h),
                 Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.w),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 70.w,
-                          height: 6.h,
-                          decoration: ShapeDecoration(
-                            color: Theme.of(context).colorScheme.onSurface,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.sp),
-                            ),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 70.w,
+                        height: 6.h,
+                        decoration: ShapeDecoration(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.sp),
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 2.w),
-                            child: TextField(
-                              controller: _emailController,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Email',
-                                  hintStyle: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onSecondary,
-                                      )),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 2.w),
+                          child: TextField(
+                            controller: _emailController,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'Email',
+                                hintStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary,
+                                    )),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 2.h),
+                      Container(
+                        width: 70.w,
+                        height: 6.h,
+                        decoration: ShapeDecoration(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.sp),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 2.w),
+                          child: TextField(
+                            controller: _passwordController,
+                            obscureText: true,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Password',
+                              hintStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary,
+                                  ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 2.h),
-                        Container(
-                          width: 70.w,
-                          height: 6.h,
-                          decoration: ShapeDecoration(
-                            color: Theme.of(context).colorScheme.onSurface,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.sp),
+                      ),
+                      SizedBox(height: 2.h),
+                      Container(
+                        width: 70.w,
+                        height: 6.h,
+                        decoration: ShapeDecoration(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.sp),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 2.w),
+                          child: TextField(
+                            controller: _confirmPasswordController,
+                            obscureText: true,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Confirm Password',
+                              hintStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary,
+                                  ),
                             ),
                           ),
-                          child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 2.w),
-                              child: TextField(
-                                controller: _passwordController,
-                                obscureText: true,
-                                style: Theme,
-                              )),
-                        )
-                      ],
-                    ))
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 2.h),
               ],
             ),
           ))
