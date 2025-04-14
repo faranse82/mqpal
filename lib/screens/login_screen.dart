@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
 import 'package:mqpal/screens/signup_screen.dart';
 import 'package:sizer/sizer.dart';
+import 'forgot_password_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -36,7 +37,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleForgotPassword() {
-    // Implement forgot password functionality
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()),
+    );
   }
 
   @override
@@ -103,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ?.copyWith(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .onSecondary,
+                                            .onPrimary,
                                       ),
                                 ),
                               ),
@@ -136,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ?.copyWith(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .onSecondary,
+                                            .onPrimary,
                                       ),
                                 ),
                               ),

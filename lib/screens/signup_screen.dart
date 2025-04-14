@@ -89,7 +89,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       ?.copyWith(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .onSecondary,
+                                            .onPrimary,
                                       )),
                             ),
                           ),
@@ -119,7 +119,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ?.copyWith(
                                       color: Theme.of(context)
                                           .colorScheme
-                                          .onSecondary,
+                                          .onPrimary,
                                     ),
                               ),
                             ),
@@ -150,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ?.copyWith(
                                       color: Theme.of(context)
                                           .colorScheme
-                                          .onSecondary,
+                                          .onPrimary,
                                     ),
                               ),
                             ),
@@ -160,6 +160,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   SizedBox(height: 2.h),
+
+                  //Password requirements
                   Container(
                     width: 55.w,
                     height: 14.h,
