@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mqpal/screens/home_screen.dart';
-import 'package:mqpal/state.dart';
-import 'package:provider/provider.dart';
+import 'package:mqpal/screens/signup_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,7 +29,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleSignUp() {
-    // Implement sign up functionality
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const SignUpPage()),
+    );
   }
 
   void _handleForgotPassword() {
@@ -49,15 +51,11 @@ class _LoginPageState extends State<LoginPage> {
             // Main login card
             Center(
               child: Container(
-                width: 85.w,
+                width: 75.w,
                 clipBehavior: Clip.antiAlias,
                 decoration: ShapeDecoration(
                   color: Theme.of(context).colorScheme.surface,
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      width: 1,
-                      color: Colors.black.withOpacity(0.2),
-                    ),
                     borderRadius: BorderRadius.circular(4.sp),
                   ),
                 ),
@@ -69,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 3.h),
                     Text(
                       'MQPal',
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SizedBox(height: 3.h),
 
